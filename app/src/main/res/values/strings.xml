@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Academico</string>
+    <string name="title_activity_cadastro">CadastroActivity</string>
+    <string name="menu_config">Configurações</string>
+    <string name="menu_sair">Sair</string>
+    <string name="txt_login">Nome de Usuário</string>
+    <string name="txt_password">Senha</string>
+    <string name="login_btn">LOGIN</string>
+    <string name="cadastrar_btn">CADASTRAR</string>
+    <string name="matriculaTxt">Matrícula</string>
+    />
+</resources>

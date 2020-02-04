@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="nomeApp">24sp</dimen>
+    <dimen name="width_btn">253dp</dimen>
+    <dimen name="height_btn">46dp</dimen>
+</resources>

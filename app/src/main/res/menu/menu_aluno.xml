@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/menu_notas"
+        android:icon="@drawable/ic_menu_icon"
+        android:title="Notas em Disciplinas"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_config"
+        android:icon="@drawable/ic_menu_icon"
+        android:title="Configurações"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_sair"
+        android:icon="@drawable/ic_menu_icon"
+        android:title="Sair"
+        app:showAsAction="never"/>
+
+</menu>

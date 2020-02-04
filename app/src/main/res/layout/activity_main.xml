@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cor_back"
+    android:backgroundTint="@color/ic_logo_background"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="195dp"
+        android:layout_height="158dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19999999"
+        app:srcCompat="@mipmap/ic_logo" />
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="@dimen/width_btn"
+        android:layout_height="@dimen/height_btn"
+        android:text="@string/login_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.823" />
+
+    <Button
+        android:id="@+id/cadastrarBtn"
+        android:layout_width="@dimen/width_btn"
+        android:layout_height="@dimen/height_btn"
+        android:text="@string/cadastrar_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn"
+        app:layout_constraintVertical_bias="0.275" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/usernameTxt"
+        android:layout_width="344dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/preto"
+        android:fontFamily="sans-serif"
+        android:hint="@string/txt_login"
+        android:textColor="#000000"
+        android:textColorHighlight="#000000"
+        android:textColorHint="@color/cinza"
+        android:textColorLink="@color/cinza"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.647"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/passwordTxt"
+        android:layout_width="344dp"
+        android:layout_height="44dp"
+        android:backgroundTint="@color/preto"
+        android:hint="@string/txt_password"
+        android:inputType="textPassword"
+        android:textColor="#FA000000"
+        android:textColorHighlight="#000000"
+        android:textColorHint="@color/cinza"
+        android:textColorLink="#000000"
+        android:textCursorDrawable="@color/cinza"
+        app:layout_constraintBottom_toTopOf="@+id/loginBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameTxt"
+        app:layout_constraintVertical_bias="0.188" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

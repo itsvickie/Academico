@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ic_logo_background"
+    tools:context=".CadastroActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="195dp"
+        android:layout_height="158dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.193"
+        app:srcCompat="@mipmap/ic_logo" />
+
+    <Button
+        android:id="@+id/cadastrarBtn"
+        android:layout_width="@dimen/width_btn"
+        android:layout_height="@dimen/height_btn"
+        android:text="@string/cadastrar_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordTxt"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <EditText
+        android:id="@+id/matriculaTxt"
+        android:layout_width="340dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="28dp"
+        android:backgroundTint="@color/preto"
+        android:ems="10"
+        android:hint="@string/matriculaTxt"
+        android:inputType="textPersonName"
+        android:textColor="@color/preto"
+        android:textColorHint="@color/cinza"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/usernameTxt"
+        android:layout_width="340dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/preto"
+        android:ems="10"
+        android:hint="@string/txt_login"
+        android:inputType="textPersonName"
+        android:textColor="@color/preto"
+        android:textColorHint="@color/cinza"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/matriculaTxt"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/passwordTxt"
+        android:layout_width="340dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="@color/preto"
+        android:ems="10"
+        android:hint="@string/txt_password"
+        android:inputType="textPassword"
+        android:textColor="@color/preto"
+        android:textColorHint="@color/cinza"
+        android:textIsSelectable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameTxt"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
