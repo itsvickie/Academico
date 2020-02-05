@@ -13,39 +13,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vochora.aluno.Aluno;
-
-import org.w3c.dom.Text;
+import com.vochora.aluno.AlunoDAO;
 
 public class CadastroActivity extends AppCompatActivity {
-    com.vochora.aluno.Aluno dadosAluno = new Aluno();
+    private Aluno dadosAluno;
+    private AlunoDAO dao;
+    private TextView matriculaUser;
+    private TextView loginUser;
+    private TextView senhaUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-        Button cadastrarBtn = findViewById(R.id.cadastrarBtn);
-        final TextView matriculaUser = findViewById(R.id.matriculaTxt);
-        final TextView loginUser = findViewById(R.id.usernameTxt);
-        final TextView senhaUser = findViewById(R.id.passwordTxt);
-
-        cadastrarBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (matriculaUser.getText().toString().equals("Matrícula") || matriculaUser.getText().toString().equals("")){
-                    Toast.makeText(CadastroActivity.this, "Matrícula Obrigatório!", Toast.LENGTH_LONG).show();
-                } else if (loginUser.getText().toString().equals("Login")|| loginUser.getText().toString().equals("")){
-                    Toast.makeText(CadastroActivity.this, "Login Obrigatório!", Toast.LENGTH_LONG).show();
-                } else if (senhaUser.getText().toString().equals("Senha") || senhaUser.getText().toString().equals("")){
-                    Toast.makeText(CadastroActivity.this, "Senha Obrigatório!", Toast.LENGTH_LONG).show();
-                } else {
-                    dadosAluno.setAlunoMatricula(Integer.parseInt(matriculaUser.getText().toString()));
-                    dadosAluno.setAlunoLogin(loginUser.getText().toString());
-                    dadosAluno.setAlunoSenha(senhaUser.getText().toString());
-                    Toast.makeText(CadastroActivity.this, "Cadastro Efetuado com Sucesso!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
+        dadosAluno = new Aluno();
+        dao = new AlunoDAO(this);
+        matriculaUser = findViewById(R.id.matriculaTxt);
+        loginUser = findViewById(R.id.usernameTxt);
+        senhaUser = findViewById(R.id.passwordTxt);
     }
 
     @Override
@@ -67,5 +52,13 @@ public class CadastroActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void salvar(View view){
+        dadosAluno = new Aluno();
+        dadosAluno.setAlunoLogin(loginUser.getText().toString());
+        dadosAluno.setAlunoSenha(senhaUser.getText().toString());
+        long id  = dao.inserir(dadosAluno);
+        Toast.makeText(this, "ID " + id, Toast.LENGTH_LONG).show();
     }
 }

@@ -22,6 +22,7 @@
         android:id="@+id/cadastrarBtn"
         android:layout_width="@dimen/width_btn"
         android:layout_height="@dimen/height_btn"
+        android:onClick="salvar"
         android:text="@string/cadastrar_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
