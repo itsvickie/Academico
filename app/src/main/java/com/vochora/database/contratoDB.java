@@ -15,8 +15,7 @@ public final class contratoDB {
 
     public static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + alunoTabela.NomeTabela + " (" +
-                    alunoTabela._ID + "INTEGER PRIMARY KEY," +
-                    alunoTabela.login + "alunoLogin varchar(10) NOT NULL" +
-                    alunoTabela.senha + "alunoSenha varchar(10) NOT NULL";
-
+                    alunoTabela._ID + "INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    alunoTabela.login + " varchar(10) NOT NULL," +
+                    alunoTabela.senha + " varchar(10) NOT NULL);";
 }

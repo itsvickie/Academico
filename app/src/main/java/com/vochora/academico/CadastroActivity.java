@@ -8,12 +8,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vochora.aluno.Aluno;
-import com.vochora.aluno.AlunoDAO;
+import com.vochora.database.AlunoDAO;
 
 public class CadastroActivity extends AppCompatActivity {
     private Aluno dadosAluno;

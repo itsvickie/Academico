@@ -1,10 +1,10 @@
-package com.vochora.aluno;
+package com.vochora.database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.vochora.database.conexaoDB;
+import com.vochora.aluno.Aluno;
 
 public class AlunoDAO {
     private conexaoDB conexao;
