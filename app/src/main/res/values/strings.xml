@@ -8,5 +8,13 @@
     <string name="login_btn">LOGIN</string>
     <string name="cadastrar_btn">CADASTRAR</string>
     <string name="matriculaTxt">Matrícula</string>
-    />
+    <string name="title_activity_adm">AdmActivity</string>
+
+    <string-array name="cursos">
+        <item>Administração</item>
+        <item>Serviço Social</item>
+        <item>Psicologia</item>
+    </string-array>
+
+
 </resources>

@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.vochora.administrador.ADMActivity"></activity>
+        <activity android:name="com.vochora.adm.AdmActivity"></activity>
+        <activity android:name="com.vochora.administrador.ADMActivity" />
         <activity android:name="com.vochora.docente.DocenteActivity" />
         <activity android:name="com.vochora.aluno.MainAlunoActivity" />
         <activity android:name=".com.vochora.aluno.AlunoActivity" />

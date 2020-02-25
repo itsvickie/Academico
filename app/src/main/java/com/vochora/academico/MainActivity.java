@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.vochora.adm.AdmActivity;
 import com.vochora.aluno.Aluno;
 import com.vochora.aluno.MainAlunoActivity;
 
@@ -45,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
                             if (dadosAluno.getAlunoLogin().equals("aluno") && dadosAluno.getAlunoSenha().equals("1234")){
                                 Intent alunoTela = new Intent(MainActivity.this, MainAlunoActivity.class);
                                 startActivity(alunoTela);
+                            } else if(dadosAluno.getAlunoLogin().equals("adm") && dadosAluno.getAlunoSenha().equals("1234")){
+                                Intent admTela = new Intent(MainActivity.this, AdmActivity.class);
+                                startActivity(admTela);
                             } else {
                                 Toast.makeText(MainActivity.this, "LOGIN E/OU SENHA INCORRETOS!!", Toast.LENGTH_SHORT).show();
                             }

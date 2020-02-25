@@ -16,7 +16,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.vochora.aluno.Aluno;
-import com.vochora.database.AlunoDAO;
+import com.vochora.firebase.inicializarBD;
 
 import java.util.UUID;
 
@@ -26,9 +26,7 @@ public class CadastroActivity extends AppCompatActivity {
     private TextView loginUser;
     private TextView senhaUser;
     private Button botaoCadastrar;
-
-    FirebaseDatabase database;
-    DatabaseReference databaseReference;
+    private inicializarBD database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +37,9 @@ public class CadastroActivity extends AppCompatActivity {
         loginUser = findViewById(R.id.usernameTxt);
         senhaUser = findViewById(R.id.passwordTxt);
         botaoCadastrar = (Button) findViewById(R.id.cadastrarBtn);
+        database = new inicializarBD();
 
-        inicializarDatabase();
+        database.inicializarDatabase(this);
 
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,21 +48,16 @@ public class CadastroActivity extends AppCompatActivity {
                 aluno.setId(UUID.randomUUID().toString());
                 aluno.setAlunoLogin(loginUser.getText().toString());
                 aluno.setAlunoSenha(loginUser.getText().toString());
-                databaseReference.child("aluno").child(aluno.getId()).setValue(aluno);
+                database.databaseReference.child("aluno").child(aluno.getId()).setValue(aluno);
                 limparCampos();
             }
 
             private void limparCampos() {
                 loginUser.setText("");
                 senhaUser.setText("");
+                matriculaUser.setText("");
             }
         });
-    }
-
-    private void inicializarDatabase() {
-        FirebaseApp.initializeApp(CadastroActivity.this);
-        database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference();
     }
 
     @Override
