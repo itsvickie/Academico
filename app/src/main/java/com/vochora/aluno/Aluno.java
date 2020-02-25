@@ -1,7 +1,7 @@
 package com.vochora.aluno;
 
 public class Aluno {
-    private Integer id;
+    private String id;
     private String alunoNome;
     private String alunoCurso;
     private int alunoCPF;
@@ -14,7 +14,7 @@ public class Aluno {
     public Aluno() {
     }
 
-    public Aluno(Integer id, String alunoNome, String alunoCurso, int alunoCPF, String alunoTurma, int alunoTelefone, int alunoMatricula, String alunoLogin, String alunoSenha) {
+    public Aluno(String id, String alunoNome, String alunoCurso, int alunoCPF, String alunoTurma, int alunoTelefone, int alunoMatricula, String alunoLogin, String alunoSenha) {
         this.id = id;
         this.alunoNome = alunoNome;
         this.alunoCurso = alunoCurso;
@@ -26,11 +26,11 @@ public class Aluno {
         this.alunoSenha = alunoSenha;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -97,4 +97,6 @@ public class Aluno {
     public void setAlunoSenha(String alunoSenha) {
         this.alunoSenha = alunoSenha;
     }
+
+
 }

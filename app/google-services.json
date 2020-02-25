@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "597370999214",
+    "firebase_url": "https://academico-f97ce.firebaseio.com",
+    "project_id": "academico-f97ce",
+    "storage_bucket": "academico-f97ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:597370999214:android:dc0b30e713591c7e07b83f",
+        "android_client_info": {
+          "package_name": "com.vochora.academico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "597370999214-5qemil9do6juh12502l4tb8nu09mh0ng.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vochora.academico",
+            "certificate_hash": "b191bf44f1e00b6a03fb190e17a64cc1f9543e5b"
+          }
+        },
+        {
+          "client_id": "597370999214-pn8uo6fv24flvl8j7e2g65vq873uq7jg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDd3C2yFwIW9aLPHRUAPAJzPa6m2SaFdVg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "597370999214-pn8uo6fv24flvl8j7e2g65vq873uq7jg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

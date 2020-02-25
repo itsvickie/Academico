@@ -8,28 +8,62 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.vochora.aluno.Aluno;
 import com.vochora.database.AlunoDAO;
 
+import java.util.UUID;
+
 public class CadastroActivity extends AppCompatActivity {
     private Aluno dadosAluno;
-    private AlunoDAO dao;
     private TextView matriculaUser;
     private TextView loginUser;
     private TextView senhaUser;
+    private Button botaoCadastrar;
+
+    FirebaseDatabase database;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
         dadosAluno = new Aluno();
-        dao = new AlunoDAO(this);
         matriculaUser = findViewById(R.id.matriculaTxt);
         loginUser = findViewById(R.id.usernameTxt);
         senhaUser = findViewById(R.id.passwordTxt);
+        botaoCadastrar = (Button) findViewById(R.id.cadastrarBtn);
+
+        inicializarDatabase();
+
+        botaoCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Aluno aluno = new Aluno();
+                aluno.setId(UUID.randomUUID().toString());
+                aluno.setAlunoLogin(loginUser.getText().toString());
+                aluno.setAlunoSenha(loginUser.getText().toString());
+                databaseReference.child("aluno").child(aluno.getId()).setValue(aluno);
+                limparCampos();
+            }
+
+            private void limparCampos() {
+                loginUser.setText("");
+                senhaUser.setText("");
+            }
+        });
+    }
+
+    private void inicializarDatabase() {
+        FirebaseApp.initializeApp(CadastroActivity.this);
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference();
     }
 
     @Override
@@ -51,13 +85,5 @@ public class CadastroActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    public void salvar(View view){
-        dadosAluno = new Aluno();
-        dadosAluno.setAlunoLogin(loginUser.getText().toString());
-        dadosAluno.setAlunoSenha(senhaUser.getText().toString());
-        long id  = dao.inserir(dadosAluno);
-        Toast.makeText(this, "ID " + id, Toast.LENGTH_LONG).show();
     }
 }
