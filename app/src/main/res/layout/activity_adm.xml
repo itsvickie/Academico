@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ic_logo_background"
+    tools:context="com.vochora.adm.AdmActivity">
+
+    <EditText
+        android:id="@+id/nomeTxt"
+        android:layout_width="320dp"
+        android:layout_height="44dp"
+        android:backgroundTint="@color/preto"
+        android:ems="10"
+        android:hint="Nome Completo"
+        android:inputType="textPersonName"
+        android:textColorHighlight="@color/cinza"
+        android:textColorLink="@color/preto"
+        android:textCursorDrawable="@color/preto"
+        app:layout_constraintBottom_toTopOf="@+id/cpfTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.954" />
+
+    <EditText
+        android:id="@+id/matriculaTxt"
+        android:layout_width="320dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/preto"
+        android:ems="10"
+        android:hint="Matrícula"
+        android:inputType="numberDecimal"
+        android:textColorHighlight="@color/cinza"
+        android:textColorLink="@color/preto"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerCursos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/cpfTxt"
+        android:layout_width="320dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/preto"
+        android:ems="10"
+        android:hint="CPF"
+        android:inputType="textPersonName"
+        android:textColorHighlight="@color/cinza"
+        android:textColorLink="@color/preto"
+        app:layout_constraintBottom_toTopOf="@+id/telefoneTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerCursos"
+        android:layout_width="320dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="192dp"
+        android:tag="Curso "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/telefoneTxt"
+        android:layout_width="320dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="@color/preto"
+        android:ems="10"
+        android:hint="Telefone"
+        android:inputType="phone"
+        android:textColorHighlight="@color/cinza"
+        android:textColorLink="@color/preto"
+        app:layout_constraintBottom_toTopOf="@+id/matriculaTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/botaoCadastrar"
+        android:layout_width="@dimen/width_btn"
+        android:layout_height="@dimen/height_btn"
+        android:text="@string/cadastrar_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCursos"
+        app:layout_constraintVertical_bias="0.389" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CADASTRO DE ALUNOS"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/nomeTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.651" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
