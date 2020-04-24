@@ -25,7 +25,24 @@
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.928" />
+            app:layout_constraintVertical_bias="0.879" />
+
+        <EditText
+            android:id="@+id/txtEmail"
+            android:layout_width="@dimen/btnWidth"
+            android:layout_height="@dimen/btnHeight"
+            android:backgroundTint="@color/preto"
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="textPersonName"
+            android:textColor="@color/preto"
+            android:textColorHint="@color/cinza"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.513"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.468" />
 
         <EditText
             android:id="@+id/txtFullname"
@@ -42,7 +59,7 @@
             app:layout_constraintHorizontal_bias="0.513"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.34" />
+            app:layout_constraintVertical_bias="0.382" />
 
         <Spinner
             android:id="@+id/spinnerUsers"
@@ -52,7 +69,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.78" />
+            app:layout_constraintVertical_bias="0.73" />
 
         <EditText
             android:id="@+id/txtPhone"
@@ -61,7 +78,7 @@
             android:backgroundTint="@color/preto"
             android:ems="10"
             android:hint="@string/telefone"
-            android:inputType="phone"
+            android:inputType="textPhonetic"
             android:textColor="@color/preto"
             android:textColorHint="@color/cinza"
             android:textIsSelectable="false"
@@ -70,41 +87,18 @@
             app:layout_constraintHorizontal_bias="0.513"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.515" />
+            app:layout_constraintVertical_bias="0.557" />
 
-        <EditText
-            android:id="@+id/txtEmail"
-            android:layout_width="@dimen/btnWidth"
-            android:layout_height="@dimen/btnHeight"
-            android:backgroundTint="@color/preto"
-            android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textPersonName"
-            android:textColor="@color/preto"
-            android:textColorHint="@color/cinza"
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="195dp"
+            android:layout_height="158dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.513"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.426" />
-
-        <EditText
-            android:id="@+id/txtEmail"
-            android:layout_width="@dimen/btnWidth"
-            android:layout_height="46dp"
-            android:backgroundTint="@color/preto"
-            android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/preto"
-            android:textColorHint="@color/cinza"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.513"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.604" />
+            app:layout_constraintVertical_bias="0.144"
+            app:srcCompat="@mipmap/ic_logo" />
 
         <EditText
             android:id="@+id/txtBirthdate"
@@ -121,18 +115,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.692" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="195dp"
-            android:layout_height="158dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.095"
-            app:srcCompat="@mipmap/ic_logo" />
+            app:layout_constraintVertical_bias="0.647" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

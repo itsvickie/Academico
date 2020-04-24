@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.vochora.aluno.Aluno;
 import com.vochora.docente.Docente;
 
+import java.util.Random;
+
 public class CadastroActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     private TextView txtFullname;
     private TextView txtEmail;
@@ -52,18 +54,22 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
             @Override
             public void onClick(View v) {
                 if (user.equals("Discente")){
+                    aluno = new Aluno();
                     aluno.setNomeCompleto(txtFullname.getText().toString());
                     aluno.setEmail(txtEmail.getText().toString());
-                    aluno.setTelefone(Integer.parseInt(txtPhone.getText().toString()));
-                    aluno.setEmail(txtEmail.getText().toString());
+                    aluno.setTelefone(txtPhone.getText().toString());
                     aluno.setBirthdate(txtBirthdate.getText().toString());
-                    Toast.makeText(CadastroActivity.this, "feito", Toast.LENGTH_SHORT).show();
-                } else if (user == "Docente"){
+                    Toast.makeText(CadastroActivity.this, "Aluno cadastrado com sucesso!\nMatrícula: " + numeroRandomico() + "\nSenha: " + aluno.getBirthdate(), Toast.LENGTH_LONG).show();
+                }
+
+                if (user.equals("Docente")){
+                    professor = new Docente();
                     professor.setNomeCompleto(txtFullname.getText().toString());
                     professor.setEmail(txtEmail.getText().toString());
-                    professor.setTelefone(Integer.parseInt(txtPhone.getText().toString()));
+                    professor.setTelefone(txtPhone.getText().toString());
                     professor.setEmail(txtEmail.getText().toString());
                     professor.setBirthdate(txtBirthdate.getText().toString());
+                    Toast.makeText(CadastroActivity.this, "Professor cadastrado com sucesso!\nMatrícula: " + numeroRandomico() + "\nSenha: " + professor.getBirthdate(), Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -101,4 +107,9 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
 
     }
 
+    private int numeroRandomico(){
+        Random random = new Random();
+        int numeroRandomico = random.nextInt(999999999);
+        return numeroRandomico;
+    }
 }

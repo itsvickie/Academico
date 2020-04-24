@@ -7,7 +7,7 @@ public class Aluno {
     private String nomeCompleto;
     private int CPF;
     private int RG;
-    private int telefone;
+    private String telefone;
     private String email;
     private String curso;
     private int período;
@@ -53,11 +53,11 @@ public class Aluno {
         this.RG = RG;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
