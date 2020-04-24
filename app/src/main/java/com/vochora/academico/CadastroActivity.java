@@ -8,51 +8,63 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vochora.aluno.Aluno;
-import com.vochora.firebase.inicializarBD;
+import com.vochora.docente.Docente;
 
-import java.util.UUID;
-
-public class CadastroActivity extends AppCompatActivity {
-    private Aluno dadosAluno;
-    private TextView matriculaUser;
-    private TextView loginUser;
-    private TextView senhaUser;
-    private Button botaoCadastrar;
-    private inicializarBD database;
+public class CadastroActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+    private TextView txtFullname;
+    private TextView txtEmail;
+    private TextView txtPhone;
+    private TextView txtBirthdate;
+    private Spinner users;
+    private Button btnCadastrar;
+    private String user;
+    private Aluno aluno;
+    private Docente professor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
-        dadosAluno = new Aluno();
-        matriculaUser = findViewById(R.id.matriculaTxt);
-        loginUser = findViewById(R.id.usernameTxt);
-        senhaUser = findViewById(R.id.passwordTxt);
-        botaoCadastrar = (Button) findViewById(R.id.cadastrarBtn);
-        database = new inicializarBD();
 
-        database.inicializarDatabase(this);
+        //Iniciando botões e campos
+        txtFullname = findViewById(R.id.txtFullname);
+        txtEmail = findViewById(R.id.txtEmail);
+        txtPhone = findViewById(R.id.txtPhone);
+        txtBirthdate = findViewById(R.id.txtBirthdate);
+        btnCadastrar = findViewById(R.id.btnCadastrar);
 
-        botaoCadastrar.setOnClickListener(new View.OnClickListener() {
+        //Spinner
+        users = findViewById(R.id.spinnerUsers);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.users, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        users.setAdapter(adapter);
+        users.setOnItemSelectedListener(this);
+
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Aluno aluno = new Aluno();
-                aluno.setId(UUID.randomUUID().toString());
-                aluno.setAlunoLogin(loginUser.getText().toString());
-                aluno.setAlunoSenha(loginUser.getText().toString());
-                database.databaseReference.child("aluno").child(aluno.getId()).setValue(aluno);
-                limparCampos();
-            }
-
-            private void limparCampos() {
-                loginUser.setText("");
-                senhaUser.setText("");
-                matriculaUser.setText("");
+                if (user.equals("Discente")){
+                    aluno.setNomeCompleto(txtFullname.getText().toString());
+                    aluno.setEmail(txtEmail.getText().toString());
+                    aluno.setTelefone(Integer.parseInt(txtPhone.getText().toString()));
+                    aluno.setEmail(txtEmail.getText().toString());
+                    aluno.setBirthdate(txtBirthdate.getText().toString());
+                    Toast.makeText(CadastroActivity.this, "feito", Toast.LENGTH_SHORT).show();
+                } else if (user == "Docente"){
+                    professor.setNomeCompleto(txtFullname.getText().toString());
+                    professor.setEmail(txtEmail.getText().toString());
+                    professor.setTelefone(Integer.parseInt(txtPhone.getText().toString()));
+                    professor.setEmail(txtEmail.getText().toString());
+                    professor.setBirthdate(txtBirthdate.getText().toString());
+                }
             }
         });
     }
@@ -77,4 +89,16 @@ public class CadastroActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String usuario = parent.getItemAtPosition(position).toString();
+        user = usuario;
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
 }

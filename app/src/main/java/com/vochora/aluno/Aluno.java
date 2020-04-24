@@ -1,102 +1,159 @@
 package com.vochora.aluno;
 
+import java.util.Date;
+
 public class Aluno {
-    private String id;
-    private String alunoNome;
-    private String alunoCurso;
-    private int alunoCPF;
-    private String alunoTurma;
-    private int alunoTelefone;
-    private int alunoMatricula;
-    private String alunoLogin;
-    private String alunoSenha;
+    private int matricula;
+    private String nomeCompleto;
+    private int CPF;
+    private int RG;
+    private int telefone;
+    private String email;
+    private String curso;
+    private int período;
+    private String turma;
+    private String birthdate;
+    private String endRua;
+    private int endNumero;
+    private String endEstado;
+    private String endCidade;
+    private String endBairro;
+    private int endCEP;
+    private String endComplemento;
 
-    public Aluno() {
+    public int getMatricula() {
+        return matricula;
     }
 
-    public Aluno(String id, String alunoNome, String alunoCurso, int alunoCPF, String alunoTurma, int alunoTelefone, int alunoMatricula, String alunoLogin, String alunoSenha) {
-        this.id = id;
-        this.alunoNome = alunoNome;
-        this.alunoCurso = alunoCurso;
-        this.alunoCPF = alunoCPF;
-        this.alunoTurma = alunoTurma;
-        this.alunoTelefone = alunoTelefone;
-        this.alunoMatricula = alunoMatricula;
-        this.alunoLogin = alunoLogin;
-        this.alunoSenha = alunoSenha;
+    public void setMatricula(int matricula) {
+        this.matricula = matricula;
     }
 
-    public String getId() {
-        return id;
+    public String getNomeCompleto() {
+        return nomeCompleto;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
     }
 
-    public String getAlunoNome() {
-        return alunoNome;
+    public int getCPF() {
+        return CPF;
     }
 
-    public void setAlunoNome(String alunoNome) {
-        this.alunoNome = alunoNome;
+    public void setCPF(int CPF) {
+        this.CPF = CPF;
     }
 
-    public String getAlunoCurso() {
-        return alunoCurso;
+    public int getRG() {
+        return RG;
     }
 
-    public void setAlunoCurso(String alunoCurso) {
-        this.alunoCurso = alunoCurso;
+    public void setRG(int RG) {
+        this.RG = RG;
     }
 
-    public int getAlunoCPF() {
-        return alunoCPF;
+    public int getTelefone() {
+        return telefone;
     }
 
-    public void setAlunoCPF(int alunoCPF) {
-        this.alunoCPF = alunoCPF;
+    public void setTelefone(int telefone) {
+        this.telefone = telefone;
     }
 
-    public String getAlunoTurma() {
-        return alunoTurma;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAlunoTurma(String alunoTurma) {
-        this.alunoTurma = alunoTurma;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public int getAlunoTelefone() {
-        return alunoTelefone;
+    public String getCurso() {
+        return curso;
     }
 
-    public void setAlunoTelefone(int alunoTelefone) {
-        this.alunoTelefone = alunoTelefone;
+    public void setCurso(String curso) {
+        this.curso = curso;
     }
 
-    public int getAlunoMatricula() {
-        return alunoMatricula;
+    public int getPeríodo() {
+        return período;
     }
 
-    public void setAlunoMatricula(int alunoMatricula) {
-        this.alunoMatricula = alunoMatricula;
+    public void setPeríodo(int período) {
+        this.período = período;
     }
 
-    public String getAlunoLogin() {
-        return alunoLogin;
+    public String getTurma() {
+        return turma;
     }
 
-    public void setAlunoLogin(String alunoLogin) {
-        this.alunoLogin = alunoLogin;
+    public void setTurma(String turma) {
+        this.turma = turma;
     }
 
-    public String getAlunoSenha() {
-        return alunoSenha;
+    public String getBirthdate() {
+        return birthdate;
     }
 
-    public void setAlunoSenha(String alunoSenha) {
-        this.alunoSenha = alunoSenha;
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
     }
 
+    public String getEndRua() {
+        return endRua;
+    }
 
+    public void setEndRua(String endRua) {
+        this.endRua = endRua;
+    }
+
+    public int getEndNumero() {
+        return endNumero;
+    }
+
+    public void setEndNumero(int endNumero) {
+        this.endNumero = endNumero;
+    }
+
+    public String getEndEstado() {
+        return endEstado;
+    }
+
+    public void setEndEstado(String endEstado) {
+        this.endEstado = endEstado;
+    }
+
+    public String getEndCidade() {
+        return endCidade;
+    }
+
+    public void setEndCidade(String endCidade) {
+        this.endCidade = endCidade;
+    }
+
+    public String getEndBairro() {
+        return endBairro;
+    }
+
+    public void setEndBairro(String endBairro) {
+        this.endBairro = endBairro;
+    }
+
+    public int getEndCEP() {
+        return endCEP;
+    }
+
+    public void setEndCEP(int endCEP) {
+        this.endCEP = endCEP;
+    }
+
+    public String getEndComplemento() {
+        return endComplemento;
+    }
+
+    public void setEndComplemento(String endComplemento) {
+        this.endComplemento = endComplemento;
+    }
 }

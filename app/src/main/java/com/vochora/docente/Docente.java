@@ -1,50 +1,139 @@
 package com.vochora.docente;
 
 public class Docente {
-    private String docenteNome;
-    private int docenteCPF;
-    private int docenteTelefone;
-    private String docenteCargo;
+    private int matricula;
+    private String nomeCompleto;
+    private int CPF;
+    private int RG;
+    private int telefone;
+    private String email;
+    private String birthdate;
+    private String endRua;
+    private int endNumero;
+    private String endEstado;
+    private String endCidade;
+    private String endBairro;
+    private int endCEP;
+    private String endComplemento;
+    private float salario;
 
-    public Docente() {
+    public int getMatricula() {
+        return matricula;
     }
 
-    public Docente(String docenteNome, int docenteCPF, int docenteTelefone, String docenteCargo) {
-        this.docenteNome = docenteNome;
-        this.docenteCPF = docenteCPF;
-        this.docenteTelefone = docenteTelefone;
-        this.docenteCargo = docenteCargo;
+    public void setMatricula(int matricula) {
+        this.matricula = matricula;
     }
 
-    public String getDocenteNome() {
-        return docenteNome;
+    public String getNomeCompleto() {
+        return nomeCompleto;
     }
 
-    public void setDocenteNome(String docenteNome) {
-        this.docenteNome = docenteNome;
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
     }
 
-    public int getDocenteCPF() {
-        return docenteCPF;
+    public int getCPF() {
+        return CPF;
     }
 
-    public void setDocenteCPF(int docenteCPF) {
-        this.docenteCPF = docenteCPF;
+    public void setCPF(int CPF) {
+        this.CPF = CPF;
     }
 
-    public int getDocenteTelefone() {
-        return docenteTelefone;
+    public int getRG() {
+        return RG;
     }
 
-    public void setDocenteTelefone(int docenteTelefone) {
-        this.docenteTelefone = docenteTelefone;
+    public void setRG(int RG) {
+        this.RG = RG;
     }
 
-    public String getDocenteCargo() {
-        return docenteCargo;
+    public int getTelefone() {
+        return telefone;
     }
 
-    public void setDocenteCargo(String docenteCargo) {
-        this.docenteCargo = docenteCargo;
+    public void setTelefone(int telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public String getEndRua() {
+        return endRua;
+    }
+
+    public void setEndRua(String endRua) {
+        this.endRua = endRua;
+    }
+
+    public int getEndNumero() {
+        return endNumero;
+    }
+
+    public void setEndNumero(int endNumero) {
+        this.endNumero = endNumero;
+    }
+
+    public String getEndEstado() {
+        return endEstado;
+    }
+
+    public void setEndEstado(String endEstado) {
+        this.endEstado = endEstado;
+    }
+
+    public String getEndCidade() {
+        return endCidade;
+    }
+
+    public void setEndCidade(String endCidade) {
+        this.endCidade = endCidade;
+    }
+
+    public String getEndBairro() {
+        return endBairro;
+    }
+
+    public void setEndBairro(String endBairro) {
+        this.endBairro = endBairro;
+    }
+
+    public int getEndCEP() {
+        return endCEP;
+    }
+
+    public void setEndCEP(int endCEP) {
+        this.endCEP = endCEP;
+    }
+
+    public String getEndComplemento() {
+        return endComplemento;
+    }
+
+    public void setEndComplemento(String endComplemento) {
+        this.endComplemento = endComplemento;
+    }
+
+    public float getSalario() {
+        return salario;
+    }
+
+    public void setSalario(float salario) {
+        this.salario = salario;
     }
 }

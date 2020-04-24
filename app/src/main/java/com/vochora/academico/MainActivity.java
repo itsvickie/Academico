@@ -13,12 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.vochora.adm.AdmActivity;
-import com.vochora.aluno.Aluno;
 import com.vochora.aluno.MainAlunoActivity;
 
 public class MainActivity extends AppCompatActivity {
-    com.vochora.aluno.Aluno dadosAluno = new Aluno();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button botaoCadastrar = (Button) findViewById(R.id.cadastrarBtn);
         Button botaoLogin = (Button) findViewById(R.id.loginBtn);
-        final TextView loginUser = findViewById(R.id.usernameTxt);
-        final TextView senhaUser = findViewById(R.id.passwordTxt);
+        final TextView loginUser = findViewById(R.id.txtEmail);
+        final TextView senhaUser = findViewById(R.id.txtBirthdate);
 
         botaoCadastrar.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -40,18 +37,6 @@ public class MainActivity extends AppCompatActivity {
         botaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
                     public void onClick(View v) {
-                dadosAluno.setAlunoLogin(loginUser.getText().toString());
-                dadosAluno.setAlunoSenha(senhaUser.getText().toString());
-
-                            if (dadosAluno.getAlunoLogin().equals("aluno") && dadosAluno.getAlunoSenha().equals("1234")){
-                                Intent alunoTela = new Intent(MainActivity.this, MainAlunoActivity.class);
-                                startActivity(alunoTela);
-                            } else if(dadosAluno.getAlunoLogin().equals("adm") && dadosAluno.getAlunoSenha().equals("1234")){
-                                Intent admTela = new Intent(MainActivity.this, AdmActivity.class);
-                                startActivity(admTela);
-                            } else {
-                                Toast.makeText(MainActivity.this, "LOGIN E/OU SENHA INCORRETOS!!", Toast.LENGTH_SHORT).show();
-                            }
                     }
         });
     }

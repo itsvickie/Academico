@@ -6,8 +6,12 @@
     <string name="txt_login">Nome de Usuário</string>
     <string name="txt_password">Senha</string>
     <string name="login_btn">LOGIN</string>
-    <string name="cadastrar_btn">CADASTRAR</string>
+    <string name="Cadastrar">CADASTRAR</string>
     <string name="matriculaTxt">Matrícula</string>
+    <string name="fullname">Nome Completo</string>
+    <string name="telefone">Telefone</string>
+    <string name="email">E-mail</string>
+    <string name="birthDate">Data de Nascimento</string>
     <string name="title_activity_adm">AdmActivity</string>
 
     <string-array name="cursos">
@@ -16,5 +20,10 @@
         <item>Psicologia</item>
     </string-array>
 
+    <string-array name="users">
+        <item>Selecione o Usuário</item>
+        <item>Discente</item>
+        <item>Docente</item>
+    </string-array>
 
 </resources>

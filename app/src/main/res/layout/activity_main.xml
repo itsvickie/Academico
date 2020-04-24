@@ -21,30 +21,31 @@
 
     <Button
         android:id="@+id/loginBtn"
-        android:layout_width="@dimen/width_btn"
-        android:layout_height="@dimen/height_btn"
+        android:layout_width="@dimen/btnWidth"
+        android:layout_height="@dimen/btnHeight"
         android:text="@string/login_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.823" />
+        app:layout_constraintVertical_bias="0.701" />
 
     <Button
         android:id="@+id/cadastrarBtn"
-        android:layout_width="@dimen/width_btn"
-        android:layout_height="@dimen/height_btn"
-        android:text="@string/cadastrar_btn"
+        android:layout_width="@dimen/btnWidth"
+        android:layout_height="@dimen/btnHeight"
+        android:text="@string/Cadastrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginBtn"
-        app:layout_constraintVertical_bias="0.275" />
+        app:layout_constraintVertical_bias="0.155" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/usernameTxt"
-        android:layout_width="344dp"
-        android:layout_height="44dp"
+        android:id="@+id/txtEmail"
+        android:layout_width="@dimen/btnWidth"
+        android:layout_height="@dimen/btnHeight"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/preto"
         android:fontFamily="sans-serif"
@@ -61,9 +62,9 @@
         app:layout_constraintVertical_bias="0.499" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/passwordTxt"
-        android:layout_width="344dp"
-        android:layout_height="44dp"
+        android:id="@+id/txtBirthdate"
+        android:layout_width="@dimen/btnWidth"
+        android:layout_height="@dimen/btnHeight"
         android:backgroundTint="@color/preto"
         android:hint="@string/txt_password"
         android:inputType="textPassword"
@@ -76,7 +77,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameTxt"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
         app:layout_constraintVertical_bias="0.188" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
