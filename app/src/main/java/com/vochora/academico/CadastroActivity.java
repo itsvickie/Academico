@@ -17,8 +17,10 @@ import android.widget.Toast;
 
 import com.vochora.aluno.Aluno;
 import com.vochora.docente.Docente;
+import com.vochora.firebase.inicializarBD;
 
 import java.util.Random;
+import java.util.UUID;
 
 public class CadastroActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     private TextView txtFullname;
@@ -28,8 +30,6 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
     private Spinner users;
     private Button btnCadastrar;
     private String user;
-    private Aluno aluno;
-    private Docente professor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,10 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
         txtBirthdate = findViewById(R.id.txtBirthdate);
         btnCadastrar = findViewById(R.id.btnCadastrar);
 
+        //inicializando Firebase
+        final inicializarBD database = new inicializarBD();
+        database.inicializarDatabase(this);
+
         //Spinner
         users = findViewById(R.id.spinnerUsers);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.users, android.R.layout.simple_spinner_item);
@@ -54,21 +58,28 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
             @Override
             public void onClick(View v) {
                 if (user.equals("Discente")){
-                    aluno = new Aluno();
+                    Aluno aluno = new Aluno();
+                    aluno.setId(UUID.randomUUID().toString());
                     aluno.setNomeCompleto(txtFullname.getText().toString());
                     aluno.setEmail(txtEmail.getText().toString());
                     aluno.setTelefone(txtPhone.getText().toString());
                     aluno.setBirthdate(txtBirthdate.getText().toString());
+
+                    database.insertAluno("aluno", aluno.getId(), aluno);
                     Toast.makeText(CadastroActivity.this, "Aluno cadastrado com sucesso!\nMatrícula: " + numeroRandomico() + "\nSenha: " + aluno.getBirthdate(), Toast.LENGTH_LONG).show();
                 }
 
                 if (user.equals("Docente")){
+                    Docente professor = new Docente();
                     professor = new Docente();
+                    professor.setId(UUID.randomUUID().toString());
                     professor.setNomeCompleto(txtFullname.getText().toString());
                     professor.setEmail(txtEmail.getText().toString());
                     professor.setTelefone(txtPhone.getText().toString());
                     professor.setEmail(txtEmail.getText().toString());
                     professor.setBirthdate(txtBirthdate.getText().toString());
+
+                    database.insertProfessor("professor", professor.getId(), professor);
                     Toast.makeText(CadastroActivity.this, "Professor cadastrado com sucesso!\nMatrícula: " + numeroRandomico() + "\nSenha: " + professor.getBirthdate(), Toast.LENGTH_LONG).show();
                 }
             }

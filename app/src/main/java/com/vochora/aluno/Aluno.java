@@ -1,8 +1,7 @@
 package com.vochora.aluno;
 
-import java.util.Date;
-
 public class Aluno {
+    private String id;
     private int matricula;
     private String nomeCompleto;
     private int CPF;
@@ -20,6 +19,38 @@ public class Aluno {
     private String endBairro;
     private int endCEP;
     private String endComplemento;
+
+    public Aluno() {
+    }
+
+    public Aluno(String id, int matricula, String nomeCompleto, int CPF, int RG, String telefone, String email, String curso, int período, String turma, String birthdate, String endRua, int endNumero, String endEstado, String endCidade, String endBairro, int endCEP, String endComplemento) {
+        this.id = id;
+        this.matricula = matricula;
+        this.nomeCompleto = nomeCompleto;
+        this.CPF = CPF;
+        this.RG = RG;
+        this.telefone = telefone;
+        this.email = email;
+        this.curso = curso;
+        this.período = período;
+        this.turma = turma;
+        this.birthdate = birthdate;
+        this.endRua = endRua;
+        this.endNumero = endNumero;
+        this.endEstado = endEstado;
+        this.endCidade = endCidade;
+        this.endBairro = endBairro;
+        this.endCEP = endCEP;
+        this.endComplemento = endComplemento;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public int getMatricula() {
         return matricula;
