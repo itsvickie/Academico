@@ -78,7 +78,7 @@
             android:backgroundTint="@color/preto"
             android:ems="10"
             android:hint="@string/telefone"
-            android:inputType="textPhonetic"
+            android:inputType="number"
             android:textColor="@color/preto"
             android:textColorHint="@color/cinza"
             android:textIsSelectable="false"

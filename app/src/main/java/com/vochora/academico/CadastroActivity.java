@@ -11,11 +11,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vochora.aluno.Aluno;
+import com.vochora.api.Mascaras;
 import com.vochora.docente.Docente;
 import com.vochora.firebase.inicializarBD;
 
@@ -23,13 +25,20 @@ import java.util.Random;
 import java.util.UUID;
 
 public class CadastroActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-    private TextView txtFullname;
-    private TextView txtEmail;
-    private TextView txtPhone;
-    private TextView txtBirthdate;
+    //Instâncias Globais
+    private EditText txtFullname;
+    private EditText txtEmail;
+    private EditText txtPhone;
+    private EditText txtPhoneF;
+    private EditText txtBirthdate;
+
     private Spinner users;
+
     private Button btnCadastrar;
+
     private String user;
+
+    private Mascaras mascara;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +63,11 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
         users.setAdapter(adapter);
         users.setOnItemSelectedListener(this);
 
+        //Aplicação de Máscaras
+        mascara = new Mascaras();
+        txtPhone = mascara.formatarTelefone(txtPhone);
+        txtBirthdate = mascara.formatarData(txtBirthdate);
+
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,8 +76,8 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
                     aluno.setId(UUID.randomUUID().toString());
                     aluno.setNomeCompleto(txtFullname.getText().toString());
                     aluno.setEmail(txtEmail.getText().toString());
-                    aluno.setTelefone(txtPhone.getText().toString());
                     aluno.setBirthdate(txtBirthdate.getText().toString());
+                    aluno.setTelefone(txtPhone.getText().toString());
 
                     database.insertAluno("aluno", aluno.getId(), aluno);
                     Toast.makeText(CadastroActivity.this, "Aluno cadastrado com sucesso!\nMatrícula: " + numeroRandomico() + "\nSenha: " + aluno.getBirthdate(), Toast.LENGTH_LONG).show();
