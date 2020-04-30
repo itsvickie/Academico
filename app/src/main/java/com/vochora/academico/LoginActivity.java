@@ -5,13 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,8 +24,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.vochora.aluno.Aluno;
 import com.vochora.aluno.MainAlunoActivity;
 
-import org.w3c.dom.Text;
-
 public class LoginActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -33,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private EditText loginUser;
     private TextView senhaUser;
+    private Switch switchUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +43,13 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.loginBtn);
         loginUser = findViewById(R.id.txtUser);
         senhaUser = findViewById(R.id.txtSenha);
+        switchUser = findViewById(R.id.switchUser);
 
+        //Firebase
         FirebaseApp.initializeApp(LoginActivity.this);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
         databaseReference = FirebaseDatabase.getInstance().getReference("aluno");
-
 
         //Botão Cadastro -> Tela Cadastro
         btnCadastrar.setOnClickListener(new View.OnClickListener(){
@@ -62,7 +64,26 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
                     public void onClick(View v) {
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                for (DataSnapshot postSnapshot:dataSnapshot.getChildren()){
+                                    Object user = postSnapshot.child("id").getValue();
+                                    Object senha = postSnapshot.child("birthdate").getValue();
+                                    if (user.equals(loginUser.getText().toString()) && senha.equals(senhaUser.getText().toString())){
+                                        Aluno aluno = postSnapshot.getValue(Aluno.class);
+                                        Intent telaAluno = new Intent(LoginActivity.this, MainAlunoActivity.class);
+                                        startActivity(telaAluno);
+                                        break;
+                                    }
+                                }
+                            }
 
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
             }
         });
     }

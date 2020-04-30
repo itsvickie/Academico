@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19999999"
+        app:layout_constraintVertical_bias="0.148"
         app:srcCompat="@mipmap/ic_logo" />
 
     <Button
@@ -56,16 +56,15 @@
         android:textColorLink="@color/cinza"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.647"
+        app:layout_constraintHorizontal_bias="0.642"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.477" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/txtSenha"
         android:layout_width="@dimen/btnWidth"
         android:layout_height="@dimen/btnHeight"
-        android:layout_marginBottom="84dp"
         android:backgroundTint="@color/preto"
         android:hint="@string/txt_password"
         android:inputType="textPassword"
@@ -74,11 +73,25 @@
         android:textColorHint="@color/cinza"
         android:textColorLink="#000000"
         android:textCursorDrawable="@color/cinza"
-        app:layout_constraintBottom_toTopOf="@+id/loginBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
-        app:layout_constraintVertical_bias="0.188" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.58" />
+
+    <Switch
+        android:id="@+id/switchUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Docente"
+        android:textColorHighlight="@color/cor_back"
+        android:textColorLink="@color/preto"
+        android:textCursorDrawable="@color/cor_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.887"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.671" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

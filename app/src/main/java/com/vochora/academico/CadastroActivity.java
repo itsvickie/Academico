@@ -21,7 +21,6 @@ import com.vochora.docente.Docente;
 import com.vochora.firebase.Database;
 
 import java.util.Random;
-import java.util.UUID;
 
 public class CadastroActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     private EditText txtFullname;
@@ -47,6 +46,7 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
         btnCadastrar = findViewById(R.id.btnCadastrar);
 
         //Iniciando o Firebase
+        database = new Database();
         database.inicializarDatabase(this);
 
         //Spinner
@@ -61,12 +61,13 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
         txtPhone = mascara.formatarTelefone(txtPhone);
         txtBirthdate = mascara.formatarData(txtBirthdate);
 
+        //Cadastro
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (user.equals("Discente")){
                     Aluno aluno = new Aluno();
-                    aluno.setId(UUID.randomUUID().toString());
+                    aluno.setId(Integer.toString(numeroRandomico()));
                     aluno.setNomeCompleto(txtFullname.getText().toString());
                     aluno.setEmail(txtEmail.getText().toString());
                     aluno.setBirthdate(txtBirthdate.getText().toString());
@@ -79,7 +80,7 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
                 if (user.equals("Docente")){
                     Docente professor = new Docente();
                     professor = new Docente();
-                    professor.setId(UUID.randomUUID().toString());
+                    professor.setId(Integer.toString(numeroRandomico()));
                     professor.setNomeCompleto(txtFullname.getText().toString());
                     professor.setEmail(txtEmail.getText().toString());
                     professor.setTelefone(txtPhone.getText().toString());
