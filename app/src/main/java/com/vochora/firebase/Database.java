@@ -8,7 +8,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.vochora.aluno.Aluno;
 import com.vochora.docente.Docente;
 
-public class inicializarBD {
+public class Database {
     public FirebaseDatabase firebaseDatabase;
     public DatabaseReference databaseReference;
 

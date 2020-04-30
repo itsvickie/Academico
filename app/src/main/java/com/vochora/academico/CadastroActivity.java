@@ -13,47 +13,40 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.vochora.aluno.Aluno;
 import com.vochora.api.Mascaras;
 import com.vochora.docente.Docente;
-import com.vochora.firebase.inicializarBD;
+import com.vochora.firebase.Database;
 
 import java.util.Random;
 import java.util.UUID;
 
 public class CadastroActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-    //Instâncias Globais
     private EditText txtFullname;
     private EditText txtEmail;
     private EditText txtPhone;
-    private EditText txtPhoneF;
     private EditText txtBirthdate;
-
-    private Spinner users;
-
     private Button btnCadastrar;
-
+    private Spinner users;
     private String user;
-
     private Mascaras mascara;
+    private Database database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-        //Iniciando botões e campos
+        //Instâncias do Layout
         txtFullname = findViewById(R.id.txtFullname);
         txtEmail = findViewById(R.id.txtEmail);
         txtPhone = findViewById(R.id.txtPhone);
         txtBirthdate = findViewById(R.id.txtBirthdate);
         btnCadastrar = findViewById(R.id.btnCadastrar);
 
-        //inicializando Firebase
-        final inicializarBD database = new inicializarBD();
+        //Iniciando o Firebase
         database.inicializarDatabase(this);
 
         //Spinner
