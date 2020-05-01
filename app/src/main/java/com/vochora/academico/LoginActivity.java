@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -23,10 +24,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vochora.aluno.Aluno;
 import com.vochora.aluno.MainAlunoActivity;
+import com.vochora.docente.DocenteActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
+    private DatabaseReference alunoReference;
+    private DatabaseReference profReference;
     private Button btnCadastrar;
     private Button btnLogin;
     private EditText loginUser;
@@ -48,8 +51,8 @@ public class LoginActivity extends AppCompatActivity {
         //Firebase
         FirebaseApp.initializeApp(LoginActivity.this);
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
-        databaseReference = FirebaseDatabase.getInstance().getReference("aluno");
+        alunoReference = FirebaseDatabase.getInstance().getReference("aluno");
+        profReference = FirebaseDatabase.getInstance().getReference("professor");
 
         //Botão Cadastro -> Tela Cadastro
         btnCadastrar.setOnClickListener(new View.OnClickListener(){
@@ -64,26 +67,51 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
                     public void onClick(View v) {
-                        databaseReference.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for (DataSnapshot postSnapshot:dataSnapshot.getChildren()){
-                                    Object user = postSnapshot.child("id").getValue();
-                                    Object senha = postSnapshot.child("birthdate").getValue();
-                                    if (user.equals(loginUser.getText().toString()) && senha.equals(senhaUser.getText().toString())){
-                                        Aluno aluno = postSnapshot.getValue(Aluno.class);
-                                        Intent telaAluno = new Intent(LoginActivity.this, MainAlunoActivity.class);
-                                        startActivity(telaAluno);
-                                        break;
-                                    }
+                //Switch Status
+                Boolean switchStatus = switchUser.isChecked();
+
+                //Troca de tela para Cadastro
+                if (!switchStatus){
+                    alunoReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot postSnapshot:dataSnapshot.getChildren()){
+                                Object user = postSnapshot.child("id").getValue();
+                                Object senha = postSnapshot.child("birthdate").getValue();
+                                if (user.equals(loginUser.getText().toString()) && senha.equals(senhaUser.getText().toString())){
+                                    Aluno aluno = postSnapshot.getValue(Aluno.class);
+                                    Intent telaAluno = new Intent(LoginActivity.this, MainAlunoActivity.class);
+                                    startActivity(telaAluno);
+                                    break;
                                 }
                             }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                        }
+                    });
+                } else {
+                    profReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot postSnapshot:dataSnapshot.getChildren()){
+                                Object user = postSnapshot.child("id").getValue();
+                                Object senha = postSnapshot.child("birthdate").getValue();
+                                if (user.equals(loginUser.getText().toString()) && senha.equals(senhaUser.getText().toString())){
+                                    Aluno aluno = postSnapshot.getValue(Aluno.class);
+                                    Intent telaProf = new Intent(LoginActivity.this, DocenteActivity.class);
+                                    startActivity(telaProf);
+                                    break;
+                                }
                             }
-                        });
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
             }
         });
     }
