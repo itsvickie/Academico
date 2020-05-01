@@ -50,9 +50,8 @@ public class LoginActivity extends AppCompatActivity {
 
         //Firebase
         FirebaseApp.initializeApp(LoginActivity.this);
-        firebaseDatabase = FirebaseDatabase.getInstance();
         alunoReference = FirebaseDatabase.getInstance().getReference("aluno");
-        profReference = FirebaseDatabase.getInstance().getReference("professor");
+        profReference = FirebaseDatabase.getInstance().getReference("docente");
 
         //Botão Cadastro -> Tela Cadastro
         btnCadastrar.setOnClickListener(new View.OnClickListener(){
@@ -76,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot postSnapshot:dataSnapshot.getChildren()){
-                                Object user = postSnapshot.child("id").getValue();
+                                Object user = postSnapshot.child("user").getValue();
                                 Object senha = postSnapshot.child("birthdate").getValue();
                                 if (user.equals(loginUser.getText().toString()) && senha.equals(senhaUser.getText().toString())){
                                     Aluno aluno = postSnapshot.getValue(Aluno.class);
@@ -96,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot postSnapshot:dataSnapshot.getChildren()){
-                                Object user = postSnapshot.child("id").getValue();
+                                Object user = postSnapshot.child("user").getValue();
                                 Object senha = postSnapshot.child("birthdate").getValue();
                                 if (user.equals(loginUser.getText().toString()) && senha.equals(senhaUser.getText().toString())){
                                     Aluno aluno = postSnapshot.getValue(Aluno.class);

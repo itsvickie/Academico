@@ -2,6 +2,8 @@ package com.vochora.aluno;
 
 public class Aluno {
     private String id;
+    private String user;
+    private String senha;
     private int matricula;
     private String nomeCompleto;
     private int CPF;
@@ -23,8 +25,10 @@ public class Aluno {
     public Aluno() {
     }
 
-    public Aluno(String id, int matricula, String nomeCompleto, int CPF, int RG, String telefone, String email, String curso, int período, String turma, String birthdate, String endRua, int endNumero, String endEstado, String endCidade, String endBairro, int endCEP, String endComplemento) {
+    public Aluno(String id, String user, String senha, int matricula, String nomeCompleto, int CPF, int RG, String telefone, String email, String curso, int período, String turma, String birthdate, String endRua, int endNumero, String endEstado, String endCidade, String endBairro, int endCEP, String endComplemento) {
         this.id = id;
+        this.user = user;
+        this.senha = senha;
         this.matricula = matricula;
         this.nomeCompleto = nomeCompleto;
         this.CPF = CPF;
@@ -50,6 +54,22 @@ public class Aluno {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public int getMatricula() {

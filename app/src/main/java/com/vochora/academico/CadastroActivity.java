@@ -27,6 +27,7 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
     private EditText txtEmail;
     private EditText txtPhone;
     private EditText txtBirthdate;
+    private EditText txtUser;
     private Button btnCadastrar;
     private Spinner users;
     private String user;
@@ -44,6 +45,7 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
         txtPhone = findViewById(R.id.txtPhone);
         txtBirthdate = findViewById(R.id.txtBirthdate);
         btnCadastrar = findViewById(R.id.btnCadastrar);
+        txtUser = findViewById(R.id.txtLogin);
 
         //Iniciando o Firebase
         database = new Database();
@@ -69,26 +71,30 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
                     Aluno aluno = new Aluno();
                     aluno.setId(Integer.toString(numeroRandomico()));
                     aluno.setNomeCompleto(txtFullname.getText().toString());
+                    aluno.setUser(txtUser.getText().toString());
                     aluno.setEmail(txtEmail.getText().toString());
                     aluno.setBirthdate(txtBirthdate.getText().toString());
                     aluno.setTelefone(txtPhone.getText().toString());
+                    aluno.setSenha(aluno.getBirthdate());
 
                     database.insertAluno("aluno", aluno.getId(), aluno);
-                    Toast.makeText(CadastroActivity.this, "Aluno cadastrado com sucesso!\nMatrícula: " + numeroRandomico() + "\nSenha: " + aluno.getBirthdate(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(CadastroActivity.this, "Aluno cadastrado com sucesso!\nUsuário: " + aluno.getUser() + "\nSenha: " + aluno.getSenha(), Toast.LENGTH_LONG).show();
+                    limparCampos();
                 }
 
                 if (user.equals("Docente")){
-                    Docente professor = new Docente();
-                    professor = new Docente();
-                    professor.setId(Integer.toString(numeroRandomico()));
-                    professor.setNomeCompleto(txtFullname.getText().toString());
-                    professor.setEmail(txtEmail.getText().toString());
-                    professor.setTelefone(txtPhone.getText().toString());
-                    professor.setEmail(txtEmail.getText().toString());
-                    professor.setBirthdate(txtBirthdate.getText().toString());
+                    Docente docente = new Docente();
+                    docente.setId(Integer.toString(numeroRandomico()));
+                    docente.setNomeCompleto(txtFullname.getText().toString());
+                    docente.setUser(txtUser.getText().toString());
+                    docente.setEmail(txtEmail.getText().toString());
+                    docente.setTelefone(txtPhone.getText().toString());
+                    docente.setEmail(txtEmail.getText().toString());
+                    docente.setBirthdate(txtBirthdate.getText().toString());
 
-                    database.insertProfessor("professor", professor.getId(), professor);
-                    Toast.makeText(CadastroActivity.this, "Professor cadastrado com sucesso!\nMatrícula: " + numeroRandomico() + "\nSenha: " + professor.getBirthdate(), Toast.LENGTH_LONG).show();
+                    database.insertProfessor("docente", docente.getId(), docente);
+                    Toast.makeText(CadastroActivity.this, "Professor cadastrado com sucesso!\nUsuário: " + docente.getUser() + "\nSenha: " + docente.getBirthdate(), Toast.LENGTH_LONG).show();
+                    limparCampos();
                 }
             }
         });
@@ -130,5 +136,13 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
         Random random = new Random();
         int numeroRandomico = random.nextInt(999999999);
         return numeroRandomico;
+    }
+
+    private void limparCampos(){
+        txtFullname.setText("");
+        txtUser.setText("");
+        txtEmail.setText("");
+        txtPhone.setText("");
+        txtBirthdate.setText("");
     }
 }
