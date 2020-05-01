@@ -75,7 +75,7 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
                     aluno.setEmail(txtEmail.getText().toString());
                     aluno.setBirthdate(txtBirthdate.getText().toString());
                     aluno.setTelefone(txtPhone.getText().toString());
-                    aluno.setSenha(aluno.getBirthdate());
+                    aluno.setSenha(txtBirthdate.getText().toString());
 
                     database.insertAluno("aluno", aluno.getId(), aluno);
                     Toast.makeText(CadastroActivity.this, "Aluno cadastrado com sucesso!\nUsuário: " + aluno.getUser() + "\nSenha: " + aluno.getSenha(), Toast.LENGTH_LONG).show();

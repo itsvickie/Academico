@@ -13,6 +13,7 @@
     <string name="email">E-mail</string>
     <string name="birthDate">Data de Nascimento</string>
     <string name="title_activity_adm">AdmActivity</string>
+    <string name="titulo_cadastroFinal"><html><b>Finalização de Cadastro</b></html></string>
 
     <string-array name="cursos">
         <item>Administração</item>

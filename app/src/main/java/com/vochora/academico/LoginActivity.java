@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,10 +25,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vochora.aluno.Aluno;
 import com.vochora.aluno.MainAlunoActivity;
+import com.vochora.docente.Docente;
 import com.vochora.docente.DocenteActivity;
 
+import java.util.List;
+
 public class LoginActivity extends AppCompatActivity {
-    private FirebaseDatabase firebaseDatabase;
     private DatabaseReference alunoReference;
     private DatabaseReference profReference;
     private Button btnCadastrar;
@@ -35,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText loginUser;
     private TextView senhaUser;
     private Switch switchUser;
+    private List<Aluno> discente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,17 +73,19 @@ public class LoginActivity extends AppCompatActivity {
                 //Switch Status
                 Boolean switchStatus = switchUser.isChecked();
 
-                //Troca de tela para Cadastro
                 if (!switchStatus){
                     alunoReference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for (DataSnapshot postSnapshot:dataSnapshot.getChildren()){
                                 Object user = postSnapshot.child("user").getValue();
-                                Object senha = postSnapshot.child("birthdate").getValue();
+                                Object senha = postSnapshot.child("senha").getValue();
+                                //Log.i("teste", user.toString() + "\n" + senha.toString());
                                 if (user.equals(loginUser.getText().toString()) && senha.equals(senhaUser.getText().toString())){
                                     Aluno aluno = postSnapshot.getValue(Aluno.class);
-                                    Intent telaAluno = new Intent(LoginActivity.this, MainAlunoActivity.class);
+                                    discente.add(aluno);
+                                    Intent telaAluno = new Intent(LoginActivity.this, RegistroActivity.class);
+                                    telaAluno.putExtra("tipoUser", "aluno");
                                     startActivity(telaAluno);
                                     break;
                                 }
@@ -98,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Object user = postSnapshot.child("user").getValue();
                                 Object senha = postSnapshot.child("birthdate").getValue();
                                 if (user.equals(loginUser.getText().toString()) && senha.equals(senhaUser.getText().toString())){
-                                    Aluno aluno = postSnapshot.getValue(Aluno.class);
+                                    Docente docente = postSnapshot.getValue(Docente.class);
                                     Intent telaProf = new Intent(LoginActivity.this, DocenteActivity.class);
                                     startActivity(telaProf);
                                     break;
