@@ -1,5 +1,8 @@
 package com.vochora.aluno;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Aluno {
     private String id;
     private String user;
@@ -46,6 +49,13 @@ public class Aluno {
         this.endBairro = endBairro;
         this.endCEP = endCEP;
         this.endComplemento = endComplemento;
+    }
+
+    public Map<String, Object> toMap(){
+        HashMap<String, Object> aluno = new HashMap<>();
+        aluno.put("email", email);
+        aluno.put("senha", senha);
+        return aluno;
     }
 
     public String getId() {

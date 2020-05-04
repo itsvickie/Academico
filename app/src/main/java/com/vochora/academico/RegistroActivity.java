@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.vochora.aluno.Aluno;
 import com.vochora.docente.Docente;
-import com.vochora.firebase.Database;
+import com.vochora.database.Database;
 
 public class RegistroActivity extends AppCompatActivity {
     private TextView txtBoasVindas;

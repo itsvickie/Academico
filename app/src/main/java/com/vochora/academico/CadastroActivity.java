@@ -10,96 +10,109 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.vochora.aluno.Aluno;
-import com.vochora.api.Mascaras;
+import com.vochora.database.ConfigDatabase;
 import com.vochora.docente.Docente;
-import com.vochora.firebase.Database;
 
+import java.util.Map;
 import java.util.Random;
 
 public class CadastroActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-    private EditText txtFullname;
-    private EditText txtEmail;
-    private EditText txtPhone;
-    private EditText txtBirthdate;
-    private EditText txtUser;
-    private Button btnCadastrar;
+    private EditText txtNomeCadastro;
+    private EditText txtUsernameCadastro;
+    private EditText txtEmailCadastro;
+    private EditText txtTelefoneCadastro;
+    private EditText txtNascimentoCadastro;
+    private EditText txtSenhaCadastro;
     private Spinner users;
     private String user;
-    private Mascaras mascara;
-    private Database database;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-        //Instâncias do Layout
-        txtFullname = findViewById(R.id.txtFullname);
-        txtEmail = findViewById(R.id.txtEmail);
-        txtPhone = findViewById(R.id.txtPhone);
-        txtBirthdate = findViewById(R.id.txtBirthdate);
-        btnCadastrar = findViewById(R.id.btnCadastrar);
-        txtUser = findViewById(R.id.txtLogin);
-
-        //Iniciando o Firebase
-        database = new Database();
-        database.inicializarDatabase(this);
+        //Instanciando os campos
+        txtNomeCadastro = findViewById(R.id.txtNomeCadastro);
+        txtUsernameCadastro = findViewById(R.id.txtUsernameCadastro);
+        txtEmailCadastro = findViewById(R.id.txtEmailCadastro);
+        txtTelefoneCadastro = findViewById(R.id.txtTelefoneCadastro);
+        txtNascimentoCadastro = findViewById(R.id.txtNascimentoCadastro);
+        txtSenhaCadastro = findViewById(R.id.txtSenhaCadastro);
+        users = findViewById(R.id.spinnerUsers);
 
         //Spinner
-        users = findViewById(R.id.spinnerUsers);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.users, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        users.setAdapter(adapter);
-        users.setOnItemSelectedListener(this);
+        criacaoSpinner();
+    }
 
-        //Aplicação de Máscaras
-        mascara = new Mascaras();
-        txtPhone = mascara.formatarTelefone(txtPhone);
-        txtBirthdate = mascara.formatarData(txtBirthdate);
-
-        //Cadastro
-        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+    //Criação do Usuário na Autenticação do Firebase
+    public void authCadastro(String email, String senha){
+        auth = ConfigDatabase.getFirebaseAuth();
+        auth.createUserWithEmailAndPassword(email, senha).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
-            public void onClick(View v) {
-                if (user.equals("Discente")){
-                    Aluno aluno = new Aluno();
-                    aluno.setId(Integer.toString(numeroRandomico()));
-                    aluno.setNomeCompleto(txtFullname.getText().toString());
-                    aluno.setUser(txtUser.getText().toString());
-                    aluno.setEmail(txtEmail.getText().toString());
-                    aluno.setBirthdate(txtBirthdate.getText().toString());
-                    aluno.setTelefone(txtPhone.getText().toString());
-                    aluno.setSenha(txtBirthdate.getText().toString());
-
-                    database.insertAluno("aluno", aluno.getId(), aluno);
-                    Toast.makeText(CadastroActivity.this, "Aluno cadastrado com sucesso!\nUsuário: " + aluno.getUser() + "\nSenha: " + aluno.getSenha(), Toast.LENGTH_LONG).show();
-                    limparCampos();
-                }
-
-                if (user.equals("Docente")){
-                    Docente docente = new Docente();
-                    docente.setId(Integer.toString(numeroRandomico()));
-                    docente.setNomeCompleto(txtFullname.getText().toString());
-                    docente.setUser(txtUser.getText().toString());
-                    docente.setEmail(txtEmail.getText().toString());
-                    docente.setTelefone(txtPhone.getText().toString());
-                    docente.setEmail(txtEmail.getText().toString());
-                    docente.setBirthdate(txtBirthdate.getText().toString());
-
-                    database.insertProfessor("docente", docente.getId(), docente);
-                    Toast.makeText(CadastroActivity.this, "Professor cadastrado com sucesso!\nUsuário: " + docente.getUser() + "\nSenha: " + docente.getBirthdate(), Toast.LENGTH_LONG).show();
-                    limparCampos();
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(CadastroActivity.this, "O usuário foi cadastrado", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    String exception = "";
+                    try {
+                        throw task.getException();
+                    } catch (FirebaseAuthWeakPasswordException e){
+                        Toast.makeText(CadastroActivity.this, "Senha muito fraca!", Toast.LENGTH_SHORT).show();
+                    } catch (FirebaseAuthInvalidCredentialsException e){
+                        Toast.makeText(CadastroActivity.this, "E-mail inválido!", Toast.LENGTH_SHORT).show();
+                    } catch (FirebaseAuthUserCollisionException e){
+                        Toast.makeText(CadastroActivity.this, "Usuário já cadastrado!", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e){
+                        exception = "Erro ao cadastrar!";
+                        e.printStackTrace();
+                    }
                 }
             }
         });
     }
 
+    //Cadastro do Usuário ao Firebase
+    public void cadastrarUsuario(View view){
+        String email = txtEmailCadastro.getText().toString();
+        String senha = txtSenhaCadastro.getText().toString();
+
+        if (!email.isEmpty()){
+            if (!senha.isEmpty()){
+                if (user.equals("Discente")){
+                    Aluno aluno = new Aluno();
+                    aluno.setEmail(email);
+                    aluno.setSenha(senha);
+                    authCadastro(aluno.getEmail(), aluno.getSenha());
+
+                } else if (user.equals("Docente")){
+                    Docente docente = new Docente();
+                    docente.setEmail(email);
+                    docente.setSenha(senha);
+                    authCadastro(docente.getEmail(), docente.getSenha());
+                }
+            } else {
+                Toast.makeText(this, "Senha não preenchido!", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "E-mail não preenchido!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //Criação do Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuCriado = getMenuInflater();
@@ -107,6 +120,7 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
         return true;
     }
 
+    //Opções dos Itens
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
@@ -132,17 +146,11 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
 
     }
 
-    private int numeroRandomico(){
-        Random random = new Random();
-        int numeroRandomico = random.nextInt(999999999);
-        return numeroRandomico;
-    }
-
-    private void limparCampos(){
-        txtFullname.setText("");
-        txtUser.setText("");
-        txtEmail.setText("");
-        txtPhone.setText("");
-        txtBirthdate.setText("");
+    //Spinner
+    public void criacaoSpinner(){
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.users, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        users.setAdapter(adapter);
+        users.setOnItemSelectedListener(this);
     }
 }

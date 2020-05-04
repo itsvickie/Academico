@@ -1,4 +1,4 @@
-package com.vochora.firebase;
+package com.vochora.database;
 
 import android.app.Activity;
 
