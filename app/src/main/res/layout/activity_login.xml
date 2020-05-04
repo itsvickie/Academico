@@ -23,6 +23,7 @@
         android:id="@+id/loginBtn"
         android:layout_width="@dimen/btnWidth"
         android:layout_height="@dimen/btnHeight"
+        android:onClick="logarUsuario"
         android:text="@string/login_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,6 +36,7 @@
         android:id="@+id/cadastrarBtn"
         android:layout_width="@dimen/btnWidth"
         android:layout_height="@dimen/btnHeight"
+        android:onClick="telaCadastro"
         android:text="@string/Cadastrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,13 +45,13 @@
         app:layout_constraintVertical_bias="0.315" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/txtUser"
+        android:id="@+id/txtEmailLogin"
         android:layout_width="@dimen/btnWidth"
         android:layout_height="@dimen/btnHeight"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/preto"
         android:fontFamily="sans-serif"
-        android:hint="@string/txt_login"
+        android:hint="E-mail cadastrado"
         android:textColor="#000000"
         android:textColorHighlight="#000000"
         android:textColorHint="@color/cinza"
@@ -62,7 +64,7 @@
         app:layout_constraintVertical_bias="0.477" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/txtSenha"
+        android:id="@+id/txtSenhaLogin"
         android:layout_width="@dimen/btnWidth"
         android:layout_height="@dimen/btnHeight"
         android:backgroundTint="@color/preto"

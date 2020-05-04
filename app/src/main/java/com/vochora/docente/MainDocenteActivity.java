@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.vochora.academico.R;
 
-public class DocenteActivity extends AppCompatActivity {
+public class MainDocenteActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

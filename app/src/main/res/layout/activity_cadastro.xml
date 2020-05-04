@@ -15,6 +15,18 @@
         tools:layout_editor_absoluteX="81dp"
         tools:layout_editor_absoluteY="0dp">
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="195dp"
+            android:layout_height="158dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.048"
+            app:srcCompat="@mipmap/ic_logo" />
+
         <Button
             android:id="@+id/btnCadastrar"
             android:layout_width="196dp"
@@ -23,7 +35,7 @@
             android:text="@string/Cadastrar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.493"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.94" />
@@ -40,9 +52,10 @@
             android:textColorHint="@color/cinza"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.486"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.324" />
+            app:layout_constraintVertical_bias="0.301" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtSenhaCadastro"
@@ -58,9 +71,10 @@
             android:textCursorDrawable="@color/cinza"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.486"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.746" />
+            app:layout_constraintVertical_bias="0.724" />
 
         <Spinner
             android:id="@+id/spinnerUsers"
@@ -68,9 +82,10 @@
             android:layout_height="@dimen/btnHeight"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.486"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.831" />
+            app:layout_constraintVertical_bias="0.809" />
 
         <EditText
             android:id="@+id/txtTelefoneCadastro"
@@ -85,9 +100,10 @@
             android:textIsSelectable="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.486"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.57" />
+            app:layout_constraintVertical_bias="0.548" />
 
         <EditText
             android:id="@+id/txtNascimentoCadastro"
@@ -102,9 +118,10 @@
             android:textIsSelectable="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.486"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.656" />
+            app:layout_constraintVertical_bias="0.634" />
 
         <EditText
             android:id="@+id/txtUsernameCadastro"
@@ -118,9 +135,10 @@
             android:textColorHint="@color/cinza"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.486"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.404" />
+            app:layout_constraintVertical_bias="0.382" />
 
         <EditText
             android:id="@+id/txtEmailCadastro"
@@ -134,20 +152,10 @@
             android:textColorHint="@color/cinza"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.486"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.484" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="195dp"
-            android:layout_height="158dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.076"
-            app:srcCompat="@mipmap/ic_logo" />
+            app:layout_constraintVertical_bias="0.462" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

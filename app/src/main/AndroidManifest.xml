@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".RegistroActivity"></activity>
-        <activity android:name="com.vochora.docente.DocenteActivity" />
+        <activity android:name="com.vochora.docente.MainDocenteActivity" />
         <activity android:name="com.vochora.aluno.MainAlunoActivity" />
         <activity android:name=".CadastroActivity" />
         <activity android:name=".LoginActivity">

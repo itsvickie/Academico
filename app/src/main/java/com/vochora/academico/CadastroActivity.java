@@ -22,13 +22,11 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.vochora.aluno.Aluno;
+import com.vochora.api.Mascaras;
 import com.vochora.database.ConfigDatabase;
 import com.vochora.docente.Docente;
 
-import java.util.Map;
-import java.util.Random;
-
-public class CadastroActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class CadastroActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private EditText txtNomeCadastro;
     private EditText txtUsernameCadastro;
     private EditText txtEmailCadastro;
@@ -38,13 +36,14 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
     private Spinner users;
     private String user;
     private FirebaseAuth auth;
+    private Mascaras mascaras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-        //Instanciando os campos
+        //Instâncias do Layout
         txtNomeCadastro = findViewById(R.id.txtNomeCadastro);
         txtUsernameCadastro = findViewById(R.id.txtUsernameCadastro);
         txtEmailCadastro = findViewById(R.id.txtEmailCadastro);
@@ -52,31 +51,44 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
         txtNascimentoCadastro = findViewById(R.id.txtNascimentoCadastro);
         txtSenhaCadastro = findViewById(R.id.txtSenhaCadastro);
         users = findViewById(R.id.spinnerUsers);
+        mascaras = new Mascaras();
 
         //Spinner
         criacaoSpinner();
+
+        //Mascaras
+        txtTelefoneCadastro = mascaras.formatarTelefone(txtTelefoneCadastro);
+        txtNascimentoCadastro = mascaras.formatarData(txtNascimentoCadastro);
+    }
+
+    //Spinner
+    public void criacaoSpinner() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.users, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        users.setAdapter(adapter);
+        users.setOnItemSelectedListener(this);
     }
 
     //Criação do Usuário na Autenticação do Firebase
-    public void authCadastro(String email, String senha){
+    public void authCadastro(String email, String senha) {
         auth = ConfigDatabase.getFirebaseAuth();
         auth.createUserWithEmailAndPassword(email, senha).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Toast.makeText(CadastroActivity.this, "O usuário foi cadastrado", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
                     String exception = "";
                     try {
                         throw task.getException();
-                    } catch (FirebaseAuthWeakPasswordException e){
+                    } catch (FirebaseAuthWeakPasswordException e) {
                         Toast.makeText(CadastroActivity.this, "Senha muito fraca!", Toast.LENGTH_SHORT).show();
-                    } catch (FirebaseAuthInvalidCredentialsException e){
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
                         Toast.makeText(CadastroActivity.this, "E-mail inválido!", Toast.LENGTH_SHORT).show();
-                    } catch (FirebaseAuthUserCollisionException e){
+                    } catch (FirebaseAuthUserCollisionException e) {
                         Toast.makeText(CadastroActivity.this, "Usuário já cadastrado!", Toast.LENGTH_SHORT).show();
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         exception = "Erro ao cadastrar!";
                         e.printStackTrace();
                     }
@@ -86,19 +98,19 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
     }
 
     //Cadastro do Usuário ao Firebase
-    public void cadastrarUsuario(View view){
+    public void cadastrarUsuario(View view) {
         String email = txtEmailCadastro.getText().toString();
         String senha = txtSenhaCadastro.getText().toString();
 
-        if (!email.isEmpty()){
-            if (!senha.isEmpty()){
-                if (user.equals("Discente")){
+        if (!email.isEmpty()) {
+            if (!senha.isEmpty()) {
+                if (user.equals("Discente")) {
                     Aluno aluno = new Aluno();
                     aluno.setEmail(email);
                     aluno.setSenha(senha);
                     authCadastro(aluno.getEmail(), aluno.getSenha());
 
-                } else if (user.equals("Docente")){
+                } else if (user.equals("Docente")) {
                     Docente docente = new Docente();
                     docente.setEmail(email);
                     docente.setSenha(senha);
@@ -123,7 +135,7 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
     //Opções dos Itens
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.config_menu:
                 Toast.makeText(this, "Em breve", Toast.LENGTH_LONG).show();
                 return true;
@@ -144,13 +156,5 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
-    }
-
-    //Spinner
-    public void criacaoSpinner(){
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.users, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        users.setAdapter(adapter);
-        users.setOnItemSelectedListener(this);
     }
 }

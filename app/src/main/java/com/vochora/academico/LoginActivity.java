@@ -5,40 +5,32 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.vochora.aluno.Aluno;
 import com.vochora.aluno.MainAlunoActivity;
+import com.vochora.database.ConfigDatabase;
 import com.vochora.docente.Docente;
-import com.vochora.docente.DocenteActivity;
-
-import java.util.List;
+import com.vochora.docente.MainDocenteActivity;
 
 public class LoginActivity extends AppCompatActivity {
-    private DatabaseReference alunoReference;
-    private DatabaseReference profReference;
-    private Button btnCadastrar;
-    private Button btnLogin;
-    private EditText loginUser;
-    private TextView senhaUser;
+    private EditText txtEmail;
+    private TextView txtSenha;
     private Switch switchUser;
-    private List<Aluno> discente;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,79 +38,88 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //Instâncias do Layout
-        btnCadastrar = findViewById(R.id.cadastrarBtn);
-        btnLogin = findViewById(R.id.loginBtn);
-        loginUser = findViewById(R.id.txtUser);
-        senhaUser = findViewById(R.id.txtSenha);
+        txtEmail = findViewById(R.id.txtEmailLogin);
+        txtSenha = findViewById(R.id.txtSenhaLogin);
         switchUser = findViewById(R.id.switchUser);
+    }
 
-        //Firebase
-        FirebaseApp.initializeApp(LoginActivity.this);
-        alunoReference = FirebaseDatabase.getInstance().getReference("aluno");
-        profReference = FirebaseDatabase.getInstance().getReference("docente");
+    /*public void onStart(){
+        super.onStart();
+        FirebaseUser usuarioAtual = auth.getCurrentUser();
+        if (usuarioAtual != null){
+            telaPrincipalAluno();
+        }
+    }*/
 
-        //Botão Cadastro -> Tela Cadastro
-        btnCadastrar.setOnClickListener(new View.OnClickListener(){
+    //Autenticação do Login
+    public void authLogin(String email, String senha){
+        auth = ConfigDatabase.getFirebaseAuth();
+        auth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onClick(View v) {
-                Intent cadastroTela = new Intent(LoginActivity.this, CadastroActivity.class);
-                startActivity(cadastroTela);
-            }
-        });
-
-        //AuthLogin
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-                    public void onClick(View v) {
-                //Switch Status
-                Boolean switchStatus = switchUser.isChecked();
-
-                if (!switchStatus){
-                    alunoReference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for (DataSnapshot postSnapshot:dataSnapshot.getChildren()){
-                                Object user = postSnapshot.child("user").getValue();
-                                Object senha = postSnapshot.child("senha").getValue();
-                                //Log.i("teste", user.toString() + "\n" + senha.toString());
-                                if (user.equals(loginUser.getText().toString()) && senha.equals(senhaUser.getText().toString())){
-                                    Aluno aluno = postSnapshot.getValue(Aluno.class);
-                                    discente.add(aluno);
-                                    Intent telaAluno = new Intent(LoginActivity.this, RegistroActivity.class);
-                                    telaAluno.putExtra("tipoUser", "aluno");
-                                    startActivity(telaAluno);
-                                    break;
-                                }
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    telaPrincipalAluno();
+                    finish();
                 } else {
-                    profReference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for (DataSnapshot postSnapshot:dataSnapshot.getChildren()){
-                                Object user = postSnapshot.child("user").getValue();
-                                Object senha = postSnapshot.child("birthdate").getValue();
-                                if (user.equals(loginUser.getText().toString()) && senha.equals(senhaUser.getText().toString())){
-                                    Docente docente = postSnapshot.getValue(Docente.class);
-                                    Intent telaProf = new Intent(LoginActivity.this, DocenteActivity.class);
-                                    startActivity(telaProf);
-                                    break;
-                                }
-                            }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                    String excecao = "";
+                    try {
+                        throw task.getException();
+                    } catch (FirebaseAuthInvalidUserException e){
+                        Toast.makeText(LoginActivity.this, "Usuário não cadastrado!", Toast.LENGTH_SHORT).show();
+                    } catch (FirebaseAuthInvalidCredentialsException e){
+                        Toast.makeText(LoginActivity.this, "E-mail ou senha inválidos!", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e){
+                        excecao = "Erro ao realizar login!" + e.getMessage();
+                        e.printStackTrace();
+                    }
                 }
             }
         });
+    }
+
+    //Login do Usuário
+    public void logarUsuario(View view){
+        Boolean switchStatus = switchUser.isChecked();
+        String email = txtEmail.getText().toString();
+        String senha = txtSenha.getText().toString();
+        
+        if (!email.isEmpty()){
+            if (!senha.isEmpty()){
+                if (switchStatus){
+                    Docente docente = new Docente();
+                    docente.setEmail(email);
+                    docente.setSenha(senha);
+                    authLogin(docente.getEmail(), docente.getSenha());
+                } else {
+                    Aluno aluno = new Aluno();
+                    aluno.setEmail(email);
+                    aluno.setSenha(senha);
+                    authLogin(aluno.getEmail(), aluno.getSenha());
+                }
+            } else {
+                Toast.makeText(this, "Digite sua senha!", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Digite seu e-mail!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //Tela Login -> Tela Cadastro
+    public void telaCadastro(View view){
+        Intent telaCadastro = new Intent(this, CadastroActivity.class);
+        startActivity(telaCadastro);
+    }
+
+    //Tela Login -> Tela Principal do Aluno
+    public void telaPrincipalAluno(){
+        Intent telaPrincipal = new Intent(this, MainAlunoActivity.class);
+        startActivity(telaPrincipal);
+    }
+
+    //Tela Login -> Tela Principal do Docente
+    public void telaPrincipalDocente(){
+        Intent telaDocente = new Intent(this, MainDocenteActivity.class);
+        startActivity(telaDocente);
     }
 
     @Override
