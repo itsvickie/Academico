@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/cor_back"
     android:backgroundTint="@color/ic_logo_background"
-    tools:context=".LoginActivity">
+    tools:context="com.vochora.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"

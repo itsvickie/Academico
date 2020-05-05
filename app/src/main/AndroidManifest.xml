@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegistroActivity"></activity>
+        <activity android:name="com.vochora.api.RegistroActivity"></activity>
         <activity android:name="com.vochora.docente.MainDocenteActivity" />
         <activity android:name="com.vochora.aluno.MainAlunoActivity" />
-        <activity android:name=".CadastroActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name="com.vochora.CadastroActivity" />
+        <activity android:name="com.vochora.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

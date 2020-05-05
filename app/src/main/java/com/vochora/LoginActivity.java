@@ -1,10 +1,11 @@
-package com.vochora.academico;
+package com.vochora;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,6 +21,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseUser;
+import com.vochora.academico.R;
 import com.vochora.aluno.Aluno;
 import com.vochora.aluno.MainAlunoActivity;
 import com.vochora.database.ConfigDatabase;
@@ -31,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView txtSenha;
     private Switch switchUser;
     private FirebaseAuth auth;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
+                    user = FirebaseAuth.getInstance().getCurrentUser();
+                    Log.i("teste", user.getUid());
                     telaPrincipalAluno();
                     finish();
                 } else {

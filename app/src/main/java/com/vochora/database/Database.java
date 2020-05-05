@@ -8,6 +8,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.vochora.aluno.Aluno;
 import com.vochora.docente.Docente;
 
+import java.util.Map;
+
 public class Database {
     public FirebaseDatabase firebaseDatabase;
     public DatabaseReference databaseReference;
@@ -22,7 +24,7 @@ public class Database {
         databaseReference.child(child).child(id).setValue(aluno);
     }
 
-    public void insertProfessor(String child, String id, Docente docente){
+    public void insertDocente(String child, String id, Docente docente){
         databaseReference.child(child).child(id).setValue(docente);
     }
 

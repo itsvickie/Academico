@@ -1,20 +1,21 @@
 package com.vochora.aluno;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class Aluno {
     private String id;
-    private String user;
     private String senha;
-    private int matricula;
+    private String matricula;
     private String nomeCompleto;
     private int CPF;
     private int RG;
     private String telefone;
     private String email;
     private String curso;
-    private int período;
+    private int periodo;
     private String turma;
     private String birthdate;
     private String endRua;
@@ -28,9 +29,8 @@ public class Aluno {
     public Aluno() {
     }
 
-    public Aluno(String id, String user, String senha, int matricula, String nomeCompleto, int CPF, int RG, String telefone, String email, String curso, int período, String turma, String birthdate, String endRua, int endNumero, String endEstado, String endCidade, String endBairro, int endCEP, String endComplemento) {
+    public Aluno(String id, String senha, String matricula, String nomeCompleto, int CPF, int RG, String telefone, String email, String curso, int periodo, String turma, String birthdate, String endRua, int endNumero, String endEstado, String endCidade, String endBairro, int endCEP, String endComplemento) {
         this.id = id;
-        this.user = user;
         this.senha = senha;
         this.matricula = matricula;
         this.nomeCompleto = nomeCompleto;
@@ -39,7 +39,7 @@ public class Aluno {
         this.telefone = telefone;
         this.email = email;
         this.curso = curso;
-        this.período = período;
+        this.periodo = periodo;
         this.turma = turma;
         this.birthdate = birthdate;
         this.endRua = endRua;
@@ -51,13 +51,7 @@ public class Aluno {
         this.endComplemento = endComplemento;
     }
 
-    public Map<String, Object> toMap(){
-        HashMap<String, Object> aluno = new HashMap<>();
-        aluno.put("email", email);
-        aluno.put("senha", senha);
-        return aluno;
-    }
-
+    @Exclude
     public String getId() {
         return id;
     }
@@ -66,14 +60,7 @@ public class Aluno {
         this.id = id;
     }
 
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
+    @Exclude
     public String getSenha() {
         return senha;
     }
@@ -82,11 +69,11 @@ public class Aluno {
         this.senha = senha;
     }
 
-    public int getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
@@ -122,6 +109,7 @@ public class Aluno {
         this.telefone = telefone;
     }
 
+    @Exclude
     public String getEmail() {
         return email;
     }
@@ -139,11 +127,11 @@ public class Aluno {
     }
 
     public int getPeríodo() {
-        return período;
+        return periodo;
     }
 
     public void setPeríodo(int período) {
-        this.período = período;
+        this.periodo = período;
     }
 
     public String getTurma() {

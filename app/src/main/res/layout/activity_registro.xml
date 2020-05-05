@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ic_logo_background"
-    tools:context=".RegistroActivity">
+    tools:context="com.vochora.api.RegistroActivity">
 
     <TextView
         android:id="@+id/textView"

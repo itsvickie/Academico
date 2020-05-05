@@ -1,13 +1,14 @@
 package com.vochora.docente;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class Docente {
     private String id;
-    private String user;
     private String senha;
-    private int matricula;
+    private String matricula;
     private String nomeCompleto;
     private int CPF;
     private int RG;
@@ -26,9 +27,8 @@ public class Docente {
     public Docente() {
     }
 
-    public Docente(String id, String user, String senha, int matricula, String nomeCompleto, int CPF, int RG, String telefone, String email, String birthdate, String endRua, int endNumero, String endEstado, String endCidade, String endBairro, int endCEP, String endComplemento, float salario) {
+    public Docente(String id, String senha, String matricula, String nomeCompleto, int CPF, int RG, String telefone, String email, String birthdate, String endRua, int endNumero, String endEstado, String endCidade, String endBairro, int endCEP, String endComplemento, float salario) {
         this.id = id;
-        this.user = user;
         this.senha = senha;
         this.matricula = matricula;
         this.nomeCompleto = nomeCompleto;
@@ -47,13 +47,7 @@ public class Docente {
         this.salario = salario;
     }
 
-    public Map<String, Object> toMap(){
-        HashMap<String, Object> docente = new HashMap<>();
-        docente.put("email", email);
-        docente.put("senha", senha);
-        return docente;
-    }
-
+    @Exclude
     public String getId() {
         return id;
     }
@@ -62,14 +56,7 @@ public class Docente {
         this.id = id;
     }
 
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
+    @Exclude
     public String getSenha() {
         return senha;
     }
@@ -78,11 +65,11 @@ public class Docente {
         this.senha = senha;
     }
 
-    public int getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(int matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 
@@ -118,6 +105,7 @@ public class Docente {
         this.telefone = telefone;
     }
 
+    @Exclude
     public String getEmail() {
         return email;
     }

@@ -1,4 +1,4 @@
-package com.vochora.academico;
+package com.vochora;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,22 +21,33 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.vochora.academico.R;
 import com.vochora.aluno.Aluno;
 import com.vochora.api.Mascaras;
+import com.vochora.api.RegistryGenerator;
 import com.vochora.database.ConfigDatabase;
+import com.vochora.database.Database;
 import com.vochora.docente.Docente;
+import com.vochora.helper.Base64Custom;
 
 public class CadastroActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private EditText txtNomeCadastro;
-    private EditText txtUsernameCadastro;
     private EditText txtEmailCadastro;
     private EditText txtTelefoneCadastro;
     private EditText txtNascimentoCadastro;
     private EditText txtSenhaCadastro;
+
     private Spinner users;
     private String user;
+
     private FirebaseAuth auth;
+
     private Mascaras mascaras;
+
+    private Database database;
+
+    private Aluno aluno;
+    private Docente docente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +56,6 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
 
         //Instâncias do Layout
         txtNomeCadastro = findViewById(R.id.txtNomeCadastro);
-        txtUsernameCadastro = findViewById(R.id.txtUsernameCadastro);
         txtEmailCadastro = findViewById(R.id.txtEmailCadastro);
         txtTelefoneCadastro = findViewById(R.id.txtTelefoneCadastro);
         txtNascimentoCadastro = findViewById(R.id.txtNascimentoCadastro);
@@ -59,6 +69,14 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
         //Mascaras
         txtTelefoneCadastro = mascaras.formatarTelefone(txtTelefoneCadastro);
         txtNascimentoCadastro = mascaras.formatarData(txtNascimentoCadastro);
+
+        //Inicializando Firebase
+        database = new Database();
+        database.inicializarDatabase(this);
+
+        //Instanciando os usuários
+        aluno = new Aluno();
+        docente = new Docente();
     }
 
     //Spinner
@@ -76,7 +94,15 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(CadastroActivity.this, "O usuário foi cadastrado", Toast.LENGTH_SHORT).show();
+                    if (user.equals("Discente")){
+                        String emailBase64 = Base64Custom.codificarBase64(aluno.getEmail());
+                        database.insertAluno("aluno", emailBase64, aluno);
+                        Toast.makeText(CadastroActivity.this, "Aluno cadastrado!", Toast.LENGTH_SHORT).show();
+                    } else if (user.equals("Docente")){
+                        String emailBase64 = Base64Custom.codificarBase64(docente.getEmail());
+                        database.insertDocente("docente", emailBase64, docente);
+                        Toast.makeText(CadastroActivity.this, "Docente cadastrado!", Toast.LENGTH_SHORT).show();
+                    }
                     finish();
                 } else {
                     String exception = "";
@@ -99,21 +125,31 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
 
     //Cadastro do Usuário ao Firebase
     public void cadastrarUsuario(View view) {
+        String nome = txtNomeCadastro.getText().toString();
         String email = txtEmailCadastro.getText().toString();
+        String telefone = txtTelefoneCadastro.getText().toString();
+        String nascimento = txtNascimentoCadastro.getText().toString();
         String senha = txtSenhaCadastro.getText().toString();
 
         if (!email.isEmpty()) {
             if (!senha.isEmpty()) {
                 if (user.equals("Discente")) {
-                    Aluno aluno = new Aluno();
+                    aluno.setNomeCompleto(nome);
+                    aluno.setTelefone(telefone);
+                    aluno.setBirthdate(nascimento);
+                    aluno.setMatricula(registroAcademico());
                     aluno.setEmail(email);
                     aluno.setSenha(senha);
-                    authCadastro(aluno.getEmail(), aluno.getSenha());
 
+                    authCadastro(aluno.getEmail(), aluno.getSenha());
                 } else if (user.equals("Docente")) {
-                    Docente docente = new Docente();
+                    docente.setMatricula(registroAcademico());
+                    docente.setNomeCompleto(nome);
+                    docente.setTelefone(telefone);
+                    docente.setBirthdate(nascimento);
                     docente.setEmail(email);
                     docente.setSenha(senha);
+
                     authCadastro(docente.getEmail(), docente.getSenha());
                 }
             } else {
@@ -122,6 +158,13 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
         } else {
             Toast.makeText(this, "E-mail não preenchido!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public String registroAcademico(){
+        String registroAcademico;
+        RegistryGenerator registro = new RegistryGenerator();
+        registroAcademico = registro.registry(5);
+        return registroAcademico;
     }
 
     //Criação do Menu

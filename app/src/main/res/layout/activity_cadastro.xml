@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/ic_logo_background"
-    tools:context=".CadastroActivity">
+    tools:context="com.vochora.CadastroActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/ic_logo_background"
-        tools:context=".CadastroActivity"
+        tools:context="com.vochora.CadastroActivity"
         tools:layout_editor_absoluteX="81dp"
         tools:layout_editor_absoluteY="0dp">
 
@@ -21,11 +21,28 @@
             android:layout_height="158dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintHorizontal_bias="0.49"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.048"
+            app:layout_constraintVertical_bias="0.113"
             app:srcCompat="@mipmap/ic_logo" />
+
+        <EditText
+            android:id="@+id/txtEmailCadastro"
+            android:layout_width="@dimen/btnWidth"
+            android:layout_height="@dimen/btnHeight"
+            android:backgroundTint="@color/preto"
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="textPersonName"
+            android:textColor="@color/preto"
+            android:textColorHint="@color/cinza"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.472"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.442" />
 
         <Button
             android:id="@+id/btnCadastrar"
@@ -35,27 +52,10 @@
             android:text="@string/Cadastrar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintHorizontal_bias="0.488"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.94" />
-
-        <EditText
-            android:id="@+id/txtNomeCadastro"
-            android:layout_width="@dimen/btnWidth"
-            android:layout_height="@dimen/btnHeight"
-            android:backgroundTint="@color/preto"
-            android:ems="10"
-            android:hint="@string/fullname"
-            android:inputType="textPersonName"
-            android:textColor="@color/preto"
-            android:textColorHint="@color/cinza"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.486"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.301" />
+            app:layout_constraintVertical_bias="0.921" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txtSenhaCadastro"
@@ -71,10 +71,10 @@
             android:textCursorDrawable="@color/cinza"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.486"
+            app:layout_constraintHorizontal_bias="0.472"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.724" />
+            app:layout_constraintVertical_bias="0.705" />
 
         <Spinner
             android:id="@+id/spinnerUsers"
@@ -82,10 +82,10 @@
             android:layout_height="@dimen/btnHeight"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.486"
+            app:layout_constraintHorizontal_bias="0.472"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.809" />
+            app:layout_constraintVertical_bias="0.79" />
 
         <EditText
             android:id="@+id/txtTelefoneCadastro"
@@ -100,10 +100,10 @@
             android:textIsSelectable="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.486"
+            app:layout_constraintHorizontal_bias="0.472"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.548" />
+            app:layout_constraintVertical_bias="0.529" />
 
         <EditText
             android:id="@+id/txtNascimentoCadastro"
@@ -118,44 +118,27 @@
             android:textIsSelectable="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.486"
+            app:layout_constraintHorizontal_bias="0.472"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.634" />
+            app:layout_constraintVertical_bias="0.615" />
 
         <EditText
-            android:id="@+id/txtUsernameCadastro"
+            android:id="@+id/txtNomeCadastro"
             android:layout_width="@dimen/btnWidth"
             android:layout_height="@dimen/btnHeight"
             android:backgroundTint="@color/preto"
             android:ems="10"
-            android:hint="@string/txt_login"
+            android:hint="@string/fullname"
             android:inputType="textPersonName"
             android:textColor="@color/preto"
             android:textColorHint="@color/cinza"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.486"
+            app:layout_constraintHorizontal_bias="0.472"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.382" />
-
-        <EditText
-            android:id="@+id/txtEmailCadastro"
-            android:layout_width="@dimen/btnWidth"
-            android:layout_height="@dimen/btnHeight"
-            android:backgroundTint="@color/preto"
-            android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textPersonName"
-            android:textColor="@color/preto"
-            android:textColorHint="@color/cinza"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.486"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.462" />
+            app:layout_constraintVertical_bias="0.356" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
