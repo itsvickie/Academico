@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,17 +16,24 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.vochora.academico.R;
 import com.vochora.aluno.Aluno;
 import com.vochora.aluno.MainAlunoActivity;
-import com.vochora.database.ConfigDatabase;
+import com.vochora.database.Database;
 import com.vochora.docente.Docente;
 import com.vochora.docente.MainDocenteActivity;
+import com.vochora.helper.Base64Custom;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText txtEmail;
@@ -57,15 +63,47 @@ public class LoginActivity extends AppCompatActivity {
 
     //Autenticação do Login
     public void authLogin(String email, String senha){
-        auth = ConfigDatabase.getFirebaseAuth();
+        final Boolean switchStatus = switchUser.isChecked();
+        auth = Database.getFirebaseAuth();
+        final String id = Base64Custom.codificarBase64(email);
+
+        FirebaseApp.initializeApp(this);
+        final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        final DatabaseReference databaseReference = firebaseDatabase.getReference();
+
         auth.signInWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     user = FirebaseAuth.getInstance().getCurrentUser();
-                    Log.i("teste", user.getUid());
-                    telaPrincipalAluno();
-                    finish();
+                    if (switchStatus){
+                        databaseReference.child("docente").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Docente docente = dataSnapshot.getValue(Docente.class);
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        telaPrincipalDocente();
+                        finish();
+                    } else {
+                        databaseReference.child("aluno").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                Aluno aluno = dataSnapshot.getValue(Aluno.class);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        telaPrincipalAluno();
+                        finish();
+                    }
                 } else {
                     String excecao = "";
                     try {
@@ -85,23 +123,12 @@ public class LoginActivity extends AppCompatActivity {
 
     //Login do Usuário
     public void logarUsuario(View view){
-        Boolean switchStatus = switchUser.isChecked();
         String email = txtEmail.getText().toString();
         String senha = txtSenha.getText().toString();
         
         if (!email.isEmpty()){
             if (!senha.isEmpty()){
-                if (switchStatus){
-                    Docente docente = new Docente();
-                    docente.setEmail(email);
-                    docente.setSenha(senha);
-                    authLogin(docente.getEmail(), docente.getSenha());
-                } else {
-                    Aluno aluno = new Aluno();
-                    aluno.setEmail(email);
-                    aluno.setSenha(senha);
-                    authLogin(aluno.getEmail(), aluno.getSenha());
-                }
+                    authLogin(email, senha);
             } else {
                 Toast.makeText(this, "Digite sua senha!", Toast.LENGTH_SHORT).show();
             }

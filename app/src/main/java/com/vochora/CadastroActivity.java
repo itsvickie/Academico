@@ -25,7 +25,6 @@ import com.vochora.academico.R;
 import com.vochora.aluno.Aluno;
 import com.vochora.api.Mascaras;
 import com.vochora.api.RegistryGenerator;
-import com.vochora.database.ConfigDatabase;
 import com.vochora.database.Database;
 import com.vochora.docente.Docente;
 import com.vochora.helper.Base64Custom;
@@ -89,7 +88,7 @@ public class CadastroActivity extends AppCompatActivity implements AdapterView.O
 
     //Criação do Usuário na Autenticação do Firebase
     public void authCadastro(String email, String senha) {
-        auth = ConfigDatabase.getFirebaseAuth();
+        auth = Database.getFirebaseAuth();
         auth.createUserWithEmailAndPassword(email, senha).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
